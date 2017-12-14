@@ -198,7 +198,7 @@
           "autoUpgradeMinorVersion": true,
           "settings": 
           { 
-              "fileUris" : "https://github.com/btcpayserver/btcpayserver-azure/entrypoint.sh",
+              "fileUris" : "https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/entrypoint.sh",
               "commandToExecute" : "./entrypoint.sh"
           }
         }
