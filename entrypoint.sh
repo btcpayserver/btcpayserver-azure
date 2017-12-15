@@ -1,26 +1,27 @@
 #!/bin/bash
 
 # It is running as root
-export DNS_NAME="$1"
-export VIRTUAL_HOST="$DNS_NAME"
-export LETSENCRYPT_HOST="$DNS_NAME"
+export AZURE_DNS="$1"
+export VIRTUAL_HOST="$AZURE_DNS"
+export LETSENCRYPT_HOST="$AZURE_DNS"
 export BTCPAY_DOCKER_COMPOSE="`pwd`/btcpayserver-docker/Mainnet"
 export ACME_CA_URI="https://acme-staging.api.letsencrypt.org/directory"
 
-echo "DNS NAME: $DNS_NAME"
+echo "DNS NAME: $AZURE_DNS"
 
 
 # Put the variable in /etc/environment for reboot
-echo "DNS_NAME=\"$DNS_NAME\"" >> /etc/environment
+cp /etc/environment /etc/environment.bak
+echo "AZURE_DNS=\"$AZURE_DNS\"" >> /etc/environment
 echo "VIRTUAL_HOST=\"$VIRTUAL_HOST\"" >> /etc/environment
 echo "LETSENCRYPT_HOST=\"$LETSENCRYPT_HOST\"" >> /etc/environment
-echo "BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE\"" >> /etc/environment
+echo "BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE/docker-compose.yml\"" >> /etc/environment
 echo "ACME_CA_URI=\"$ACME_CA_URI\"" >> /etc/environment
 
 # Put the variable in /etc/profile.d when a user log interactively
 touch "/etc/profile.d/btcpay-env.sh"
 echo "#!/bin/bash" >> /etc/profile.d/btcpay-env.sh
-echo "export DNS_NAME=\"$DNS_NAME\"" >> /etc/profile.d/btcpay-env.sh
+echo "export AZURE_DNS=\"$AZURE_DNS\"" >> /etc/profile.d/btcpay-env.sh
 echo "export VIRTUAL_HOST=\"$VIRTUAL_HOST\"" >> /etc/profile.d/btcpay-env.sh
 echo "export LETSENCRYPT_HOST=\"$LETSENCRYPT_HOST\"" >> /etc/profile.d/btcpay-env.sh
 echo "export BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE\"" >> /etc/profile.d/btcpay-env.sh
@@ -51,9 +52,9 @@ curl -L https://github.com/docker/compose/releases/download/1.17.1/docker-compos
 chmod +x /usr/local/bin/docker-compose
 
 # Clone btcpayserver
-git clone https://github.com/btcpayserver/btcpayserver-docker && cd $BTCPAY_DOCKER_COMPOSE
+git clone https://github.com/btcpayserver/btcpayserver-docker
 
-docker-compose up -d
+docker-compose -f "$BTCPAY_DOCKER_COMPOSE" up -d
 
 # Schedule for reboot
 
@@ -70,7 +71,7 @@ stop on runlevel [!2345]
 # respawn # might cause over charge
 
 script
-    docker-compose -f \"$BTCPAY_DOCKER_COMPOSE/docker-compose.yml\" up -d
+    docker-compose -f \"$BTCPAY_DOCKER_COMPOSE\" up -d
 end script" > /etc/init/start_containers.conf
 
 initctl reload-configuration
