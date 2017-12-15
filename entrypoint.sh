@@ -33,14 +33,5 @@ chmod +x /usr/local/bin/docker-compose
 # Clone btcpayserver
 git clone https://github.com/btcpayserver/btcpayserver-docker && cd btcpayserver-docker/Regtest
 
-echo "
-description \"Docker-compose up\"
-start on startup
-pre-start script
-    cd `pwd`
-end script
-exec docker-compose up -d
-" > /etc/init/docker-compose-startup.conf
-
 docker-compose up -d
 pwd
