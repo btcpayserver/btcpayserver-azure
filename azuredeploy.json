@@ -39,7 +39,6 @@
       "imageOffer": "UbuntuServer",
       "OSDiskName": "osdiskfordockersimple",
       "nicName": "myVMNicD",
-      "extensionName": "DockerExtension",
       "addressPrefix": "10.0.0.0/16",
       "subnetName": "Subnet",
       "subnetPrefix": "10.0.0.0/24",
@@ -169,7 +168,7 @@
       },
       {
         "type": "Microsoft.Compute/virtualMachines/extensions",
-        "name": "[concat(variables('vmName'),'/', variables('extensionName'))]",
+        "name": "[concat(variables('vmName'),'/DockerExtension')]",
         "apiVersion": "2017-03-30",
         "location": "[resourceGroup().location]",
         "dependsOn": [
@@ -185,11 +184,11 @@
       },
       {
         "type": "Microsoft.Compute/virtualMachines/extensions",
-        "name": "[concat(variables('vmName'),'/', variables('extensionName'))]",
+        "name": "[concat(variables('vmName'),'/CSExtension')]",
         "apiVersion": "2017-03-30",
         "location": "[resourceGroup().location]",
         "dependsOn": [
-          "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
+          "[concat(variables('vmName'),'/DockerExtension')]"
         ],
         "properties": {
           "publisher": "Microsoft.Azure.Extensions",
@@ -198,7 +197,7 @@
           "autoUpgradeMinorVersion": true,
           "settings": 
           { 
-              "fileUris" : "https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/entrypoint.sh",
+              "fileUris" : ["https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/entrypoint.sh"],
               "commandToExecute" : "./entrypoint.sh"
           }
         }
