@@ -4,7 +4,7 @@
 export AZURE_DNS="$1"
 export VIRTUAL_HOST="$AZURE_DNS"
 export LETSENCRYPT_HOST="$AZURE_DNS"
-export BTCPAY_DOCKER_COMPOSE="`pwd`/btcpayserver-docker/Mainnet"
+export BTCPAY_DOCKER_COMPOSE="`pwd`/btcpayserver-docker/Mainnet/docker-compose.yml"
 export ACME_CA_URI="https://acme-staging.api.letsencrypt.org/directory"
 
 echo "DNS NAME: $AZURE_DNS"
@@ -15,7 +15,7 @@ cp /etc/environment /etc/environment.bak
 echo "AZURE_DNS=\"$AZURE_DNS\"" >> /etc/environment
 echo "VIRTUAL_HOST=\"$VIRTUAL_HOST\"" >> /etc/environment
 echo "LETSENCRYPT_HOST=\"$LETSENCRYPT_HOST\"" >> /etc/environment
-echo "BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE/docker-compose.yml\"" >> /etc/environment
+echo "BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE\"" >> /etc/environment
 echo "ACME_CA_URI=\"$ACME_CA_URI\"" >> /etc/environment
 
 # Put the variable in /etc/profile.d when a user log interactively
