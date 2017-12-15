@@ -30,10 +30,10 @@ git clone https://github.com/btcpayserver/btcpayserver-docker && cd btcpayserver
 
 echo "
 description \"Docker-compose up\"
+start on startup
 pre-start script
     cd `pwd`
 end script
-start on startup
 exec docker-compose up -d
 " > /etc/init/docker-compose-startup.conf
 
