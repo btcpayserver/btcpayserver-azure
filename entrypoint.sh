@@ -1,10 +1,11 @@
 #!/bin/bash
 
 # It is running as root
-export DNS_NAME=$1
-export VIRTUAL_HOST=$DNS_NAME
-export LETSENCRYPT_HOST=$DNS_NAME
+export DNS_NAME="$1"
+export VIRTUAL_HOST="$DNS_NAME"
+export LETSENCRYPT_HOST="$DNS_NAME"
 export BTCPAY_DOCKER_COMPOSE="`pwd`/btcpayserver-docker/Mainnet"
+export ACME_CA_URI="https://acme-staging.api.letsencrypt.org/directory"
 
 echo "DNS NAME: $DNS_NAME"
 
@@ -14,6 +15,7 @@ echo "DNS_NAME=\"$DNS_NAME\"" >> /etc/environment
 echo "VIRTUAL_HOST=\"$VIRTUAL_HOST\"" >> /etc/environment
 echo "LETSENCRYPT_HOST=\"$LETSENCRYPT_HOST\"" >> /etc/environment
 echo "BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE\"" >> /etc/environment
+echo "ACME_CA_URI=\"$ACME_CA_URI\"" >> /etc/environment
 
 # Put the variable in /etc/profile.d when a user log interactively
 touch "/etc/profile.d/btcpay-env.sh"
@@ -22,6 +24,7 @@ echo "export DNS_NAME=\"$DNS_NAME\"" >> /etc/profile.d/btcpay-env.sh
 echo "export VIRTUAL_HOST=\"$VIRTUAL_HOST\"" >> /etc/profile.d/btcpay-env.sh
 echo "export LETSENCRYPT_HOST=\"$LETSENCRYPT_HOST\"" >> /etc/profile.d/btcpay-env.sh
 echo "export BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE\"" >> /etc/profile.d/btcpay-env.sh
+echo "export ACME_CA_URI=\"$ACME_CA_URI\"" >> /etc/profile.d/btcpay-env.sh
 
 # Install docker (https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#set-up-the-repository) and docker-compose 
 apt-get update 2>error
