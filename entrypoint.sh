@@ -2,9 +2,15 @@
 
 # It is running as root
 export DNS_NAME=$1
+export VIRTUAL_HOST=$DNS_NAME
+export LETSENCRYPT_HOST=$DNS_NAME
 
 echo "DNS NAME: $DNS_NAME"
+
+
 echo "DNS_NAME=$DNS_NAME" >> /etc/environment
+echo "VIRTUAL_HOST=$DNS_NAME" >> /etc/environment
+echo "LETSENCRYPT_HOST=$DNS_NAME" >> /etc/environment
 
 # Install docker (https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#set-up-the-repository) and docker-compose 
 apt-get update 2>error
