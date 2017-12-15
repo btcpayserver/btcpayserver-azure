@@ -27,4 +27,5 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 # Clone btcpayserver
 git clone https://github.com/btcpayserver/btcpayserver-docker && cd btcpayserver-docker/Regtest
-docker-compose up
+
+pwd
