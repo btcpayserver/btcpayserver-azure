@@ -33,9 +33,17 @@ Get-AzureRmSubscription –SubscriptionId "your subscription" | Select-AzureRmSu
 Create a new BTCPay Server instance:
 
 ```
-.\deployOnAzure.ps1 -ResourceGroupName "my-awesome-btcpay"
+.\deployOnAzure.ps1 -ResourceGroupName "myawesomebtcpay" -Network "mainnet"
 ```
+
+Valid Network values are:
+
+* mainnet
+* testnet
+* regtest
+
+For ResourceGroupName, use only alphabetic lower case.
 
 This might take around 5 minutes.
 
-It will print you the DNS name of your server `my-awesome-btcpay.southcentralus.cloudapp.azure.com`, you can browse to it to enjoy your BTCPay instance.
+It will print you the DNS name of your server `myawesomebtcpay.southcentralus.cloudapp.azure.com`, you can browse to it to enjoy your BTCPay instance.
