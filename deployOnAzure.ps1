@@ -9,6 +9,7 @@ $rg = $ResourceGroupName
 
 $usr = ([char[]]([char]'a'..[char]'z') + ([char[]]([char]'A'..[char]'Z')) + 0..9 | Sort-Object {Get-Random})[0..8] -join ''
 $pass = ([char[]]([char]'a'..[char]'z') + ([char[]]([char]'A'..[char]'Z')) + 0..9 | Sort-Object {Get-Random})[0..16] -join ''
+$pass = $pass + 'aB1' # So we satisfy 100% sure the password requirements
 
 $parameters = `
 @{"adminUsername" = $usr;`
@@ -25,10 +26,12 @@ $cmd = "ssh $usr@$site"
 $temp = "Username: $usr`n"
 $temp += "Password: $pass`n"
 $temp += "Machine address: $site`n"
-$temp += "Command line: $cmd`n"
-$temp += "Command line copied to keyboard"
+$temp += "Command line: $cmd`n`n"
+
+$temp += "Your BTCPay server instance will be available shortly on: https://$site/ with a staging certificate from Let's Encrypt!`n"
+$temp += "Your next steps are:`n"
+$temp += "`t1. Add the following DNS record to your domain server: `"your-domain.com. CNAME $site.`"`n"
+$temp += "`t2. Connect via SSH to this virtual machine, and run `". ./changedomain your-domain.com`"`n"
+$temp += "You will then have a fully HTTPS configured access to your own BTCPay Server instance"
 
 Write-Host $temp
-
-# Copy link of VM to clipboard
-$cmd | Set-Clipboard
