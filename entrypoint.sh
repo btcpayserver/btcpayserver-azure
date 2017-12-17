@@ -4,7 +4,7 @@
 export AZURE_DNS="$1"
 export VIRTUAL_HOST="$AZURE_DNS"
 export LETSENCRYPT_HOST="$AZURE_DNS"
-export BTCPAY_DOCKER_COMPOSE="`pwd`/btcpayserver-docker/Mainnet/docker-compose.yml"
+export BTCPAY_DOCKER_COMPOSE="`pwd`/btcpayserver-docker/Production/docker-compose.yml"
 export ACME_CA_URI="https://acme-staging.api.letsencrypt.org/directory"
 
 echo "DNS NAME: $AZURE_DNS"
