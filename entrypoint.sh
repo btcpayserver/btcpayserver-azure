@@ -9,6 +9,24 @@ export ACME_CA_URI="https://acme-staging.api.letsencrypt.org/directory"
 
 echo "DNS NAME: $AZURE_DNS"
 
+if [ "$2" == "mainnet" ]; then
+    export BITCOIND_NETWORKPARAMETER="#mainnet"
+    export NBITCOIN_NETWORK="mainnet"
+    export BITCOIND_COOKIEFILE=".cookie"
+fi
+
+if [ "$2" == "testnet" ]; then
+    export BITCOIND_NETWORKPARAMETER="testnet=1"
+    export NBITCOIN_NETWORK="testnet"
+    export BITCOIND_COOKIEFILE="testnet/.cookie"
+fi
+
+
+if [ "$2" == "regtest" ]; then
+    export BITCOIND_NETWORKPARAMETER="regtest=1"
+    export NBITCOIN_NETWORK="regtest"
+    export BITCOIND_COOKIEFILE="regtest/.cookie"
+fi
 
 # Put the variable in /etc/environment for reboot
 cp /etc/environment /etc/environment.bak
@@ -17,6 +35,9 @@ echo "VIRTUAL_HOST=\"$VIRTUAL_HOST\"" >> /etc/environment
 echo "LETSENCRYPT_HOST=\"$LETSENCRYPT_HOST\"" >> /etc/environment
 echo "BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE\"" >> /etc/environment
 echo "ACME_CA_URI=\"$ACME_CA_URI\"" >> /etc/environment
+echo "BITCOIND_NETWORKPARAMETER=\"$BITCOIND_NETWORKPARAMETER\"" >> /etc/environment
+echo "NBITCOIN_NETWORK=\"$NBITCOIN_NETWORK\"" >> /etc/environment
+echo "BITCOIND_COOKIEFILE=\"$BITCOIND_COOKIEFILE\"" >> /etc/environment
 
 # Put the variable in /etc/profile.d when a user log interactively
 touch "/etc/profile.d/btcpay-env.sh"
@@ -26,6 +47,9 @@ echo "export VIRTUAL_HOST=\"$VIRTUAL_HOST\"" >> /etc/profile.d/btcpay-env.sh
 echo "export LETSENCRYPT_HOST=\"$LETSENCRYPT_HOST\"" >> /etc/profile.d/btcpay-env.sh
 echo "export BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE\"" >> /etc/profile.d/btcpay-env.sh
 echo "export ACME_CA_URI=\"$ACME_CA_URI\"" >> /etc/profile.d/btcpay-env.sh
+echo "export BITCOIND_NETWORKPARAMETER=\"$BITCOIND_NETWORKPARAMETER\"" >> /etc/profile.d/btcpay-env.sh
+echo "export NBITCOIN_NETWORK=\"$NBITCOIN_NETWORK\"" >> /etc/profile.d/btcpay-env.sh
+echo "export BITCOIND_COOKIEFILE=\"$BITCOIND_COOKIEFILE\"" >> /etc/profile.d/btcpay-env.sh
 
 # Install docker (https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#set-up-the-repository) and docker-compose 
 apt-get update 2>error

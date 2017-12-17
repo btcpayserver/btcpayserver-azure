@@ -21,6 +21,18 @@
           "description": "VM size for the Docker host."
         }
       },
+      "network": {
+        "type": "string",
+        "allowedValues": [
+          "mainnet",
+          "testnet",
+          "regtest"
+        ],
+        "defaultValue": "mainnet",
+        "metadata": {
+          "description": "The blockchain to connect to."
+        }
+      },
       "ubuntuOSVersion": {
         "type": "string",
         "defaultValue": "14.04.4-LTS",
@@ -183,7 +195,7 @@
           { 
               "fileUris" : ["https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/entrypoint.sh", 
                             "https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/changedomain.sh"],
-              "commandToExecute" : "[concat('./entrypoint.sh ', reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn)]"
+              "commandToExecute" : "[concat('./entrypoint.sh ', reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn, ' ', parameters('network'))]"
           }
         }
       }
