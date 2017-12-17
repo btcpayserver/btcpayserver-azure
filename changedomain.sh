@@ -23,4 +23,5 @@ echo "export LETSENCRYPT_HOST=\"$LETSENCRYPT_HOST\"" >> /etc/profile.d/btcpay-en
 echo "export BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE\"" >> /etc/profile.d/btcpay-env.sh
 echo "export ACME_CA_URI=\"$ACME_CA_URI\"" >> /etc/profile.d/btcpay-env.sh
 
-docker-compose -f "$BTCPAY_DOCKER_COMPOSE" restart
+docker-compose -f "$BTCPAY_DOCKER_COMPOSE" down
+docker-compose -f "$BTCPAY_DOCKER_COMPOSE" up -d
