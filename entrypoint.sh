@@ -18,7 +18,7 @@ fi
 if [ "$2" == "testnet" ]; then
     export BITCOIND_NETWORKPARAMETER="testnet=1"
     export NBITCOIN_NETWORK="testnet"
-    export BITCOIND_COOKIEFILE="testnet/.cookie"
+    export BITCOIND_COOKIEFILE="testnet3/.cookie"
 fi
 
 
