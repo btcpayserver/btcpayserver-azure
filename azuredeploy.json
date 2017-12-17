@@ -181,7 +181,8 @@
           "autoUpgradeMinorVersion": true,
           "settings": 
           { 
-              "fileUris" : ["https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/entrypoint.sh"],
+              "fileUris" : ["https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/entrypoint.sh", 
+                            "https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/changedomain.sh"],
               "commandToExecute" : "[concat('./entrypoint.sh ', reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn)]"
           }
         }

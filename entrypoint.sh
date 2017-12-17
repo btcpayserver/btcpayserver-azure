@@ -75,3 +75,6 @@ script
 end script" > /etc/init/start_containers.conf
 
 initctl reload-configuration
+
+
+ln -s ./changedomain.sh /usr/bin/changedomain.sh
