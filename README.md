@@ -3,6 +3,12 @@
 Instructions to deploy BTCPay Server with an Microsoft Azure account.
 The following instructions a [Microsoft Azure](https://azure.microsoft.com/) account.
 
+# Deploy via Microsoft Azure Portal
+
+Click on this button and follow instructions:
+
+[![Deploy to Azure](https://azuredeploy.net/deploybutton.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fbtcpayserver%2Fbtcpayserver-azure%2Fmaster%2Fazuredeploy.json)
+
 # Deploy with PowerShell
 
 ## Step 1: Download and install Azure PowerShell
