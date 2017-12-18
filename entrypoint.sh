@@ -95,6 +95,7 @@ stop on runlevel [!2345]
 # respawn # might cause over charge
 
 script
+    . /etc/profile.d/btcpay-env.sh
     docker-compose -f \"$BTCPAY_DOCKER_COMPOSE\" up -d
 end script" > /etc/init/start_containers.conf
 
