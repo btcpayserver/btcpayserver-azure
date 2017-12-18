@@ -59,7 +59,7 @@
       "publicIPAddressName": "BTCPayServerPublicIP",
       "publicIPAddressType": "Dynamic",
       "vmStorageAccountContainerName": "vhds",
-      "vmAccountStorageName" : "[concat(uniqueString( resourceGroup().id, deployment().name ), 'StorageAccount')]",
+      "vmAccountStorageName" : "[concat(uniqueString( resourceGroup().id, deployment().name ), 'storageaccount')]",
       "vmName": "BTCPayServerVM",
       "virtualNetworkName": "BTCPayServerNetwork",
       "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
@@ -200,6 +200,20 @@
           }
         }
       }
-    ]
+    ],
+    "outputs": {
+        "server-azure-dns" : {
+            "type": "string",
+            "value": "[reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn]"
+        },
+        "server-url" : {
+            "type": "string",
+            "value": "[concat('https://', reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn, '/')]"
+        },
+        "server-ip" : {
+            "type": "string",
+            "value": "[reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').ipAddress]"
+        }
+    }
   }
   
