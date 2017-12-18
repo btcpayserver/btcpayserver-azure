@@ -15,6 +15,13 @@
           "description": "The name of the SSH password."
         }
       },
+      "notificationEmail": {
+        "type": "string",
+        "defaultValue": "yourname@example.com",
+        "metadata": {
+          "description": "Email used by Let's encrypt to notify you about certificate expiration (optional)"
+        }
+      },
       "vmSize": {
         "type": "string",
         "defaultValue": "Standard_F1",
@@ -196,7 +203,7 @@
           { 
               "fileUris" : ["https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/entrypoint.sh", 
                             "https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/changedomain.sh"],
-              "commandToExecute" : "[concat('./entrypoint.sh ', reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn, ' ', parameters('network'))]"
+              "commandToExecute" : "[concat('./entrypoint.sh ', reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn, ' ', parameters('network'), ' ', parameters('notificationEmail'))]"
           }
         }
       }
