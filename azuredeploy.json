@@ -202,6 +202,10 @@
       }
     ],
     "outputs": {
+        "ssh-username" : {
+            "type": "string",
+            "value": "[parameters('adminUsername')]"
+        },
         "server-azure-dns" : {
             "type": "string",
             "value": "[reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn]"
@@ -209,10 +213,6 @@
         "server-url" : {
             "type": "string",
             "value": "[concat('https://', reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn, '/')]"
-        },
-        "server-ip" : {
-            "type": "string",
-            "value": "[reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').ipAddress]"
         }
     }
   }
