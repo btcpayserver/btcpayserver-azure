@@ -59,7 +59,7 @@
       "publicIPAddressName": "BTCPayServerPublicIP",
       "publicIPAddressType": "Dynamic",
       "vmStorageAccountContainerName": "vhds",
-      "vmAccountStorageName" : "[concat(uniqueString( resourceGroup().id, deployment().name ), 'storageaccount')]",
+      "vmAccountStorageName" : "[concat(uniqueString( resourceGroup().id, deployment().name ), 'storage')]",
       "vmName": "BTCPayServerVM",
       "virtualNetworkName": "BTCPayServerNetwork",
       "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
