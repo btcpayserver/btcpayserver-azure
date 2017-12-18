@@ -2,8 +2,7 @@
 
 # It is running as root
 export AZURE_DNS="$1"
-export VIRTUAL_HOST="$AZURE_DNS"
-export LETSENCRYPT_HOST="$AZURE_DNS"
+export BTCPAY_HOST="$AZURE_DNS"
 export BTCPAY_DOCKER_COMPOSE="`pwd`/btcpayserver-docker/Production/docker-compose.yml"
 export ACME_CA_URI="https://acme-staging.api.letsencrypt.org/directory"
 
@@ -31,8 +30,7 @@ fi
 # Put the variable in /etc/environment for reboot
 cp /etc/environment /etc/environment.bak
 echo "AZURE_DNS=\"$AZURE_DNS\"" >> /etc/environment
-echo "VIRTUAL_HOST=\"$VIRTUAL_HOST\"" >> /etc/environment
-echo "LETSENCRYPT_HOST=\"$LETSENCRYPT_HOST\"" >> /etc/environment
+echo "BTCPAY_HOST=\"$BTCPAY_HOST\"" >> /etc/environment
 echo "BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE\"" >> /etc/environment
 echo "ACME_CA_URI=\"$ACME_CA_URI\"" >> /etc/environment
 echo "BITCOIND_NETWORKPARAMETER=\"$BITCOIND_NETWORKPARAMETER\"" >> /etc/environment
@@ -43,8 +41,7 @@ echo "BITCOIND_COOKIEFILE=\"$BITCOIND_COOKIEFILE\"" >> /etc/environment
 touch "/etc/profile.d/btcpay-env.sh"
 echo "#!/bin/bash" >> /etc/profile.d/btcpay-env.sh
 echo "export AZURE_DNS=\"$AZURE_DNS\"" >> /etc/profile.d/btcpay-env.sh
-echo "export VIRTUAL_HOST=\"$VIRTUAL_HOST\"" >> /etc/profile.d/btcpay-env.sh
-echo "export LETSENCRYPT_HOST=\"$LETSENCRYPT_HOST\"" >> /etc/profile.d/btcpay-env.sh
+echo "export BTCPAY_HOST=\"$BTCPAY_HOST\"" >> /etc/profile.d/btcpay-env.sh
 echo "export BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE\"" >> /etc/profile.d/btcpay-env.sh
 echo "export ACME_CA_URI=\"$ACME_CA_URI\"" >> /etc/profile.d/btcpay-env.sh
 echo "export BITCOIND_NETWORKPARAMETER=\"$BITCOIND_NETWORKPARAMETER\"" >> /etc/profile.d/btcpay-env.sh
