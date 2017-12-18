@@ -1,7 +1,8 @@
 # BTCPayServer Azure
 
-Instructions to deploy BTCPay Server with an Microsoft Azure account.
-The following instructions a [Microsoft Azure](https://azure.microsoft.com/) account.
+Instructions to deploy BTCPay Server in [production environment](https://github.com/btcpayserver/btcpayserver-docker/tree/master/Production) hosted in Microsoft Azure.
+
+The following instructions assume you have [Microsoft Azure](https://azure.microsoft.com/) subscription.
 
 # Deploy via Microsoft Azure Portal
 
@@ -53,3 +54,7 @@ For ResourceGroupName, use only alphabetic lower case.
 This might take around 5 minutes.
 
 It will print you the DNS name of your server `myawesomebtcpay.southcentralus.cloudapp.azure.com`, you can browse to it to enjoy your BTCPay instance.
+
+# Deploy on Linux
+
+TODO: Write shell scripts using [Az tool](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/create-ssh-secured-vm-from-template), [other link](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-template-deploy-cli), [other link](https://github.com/MicrosoftDocs/azure-docs/blob/master/articles/azure-resource-manager/resource-group-template-deploy-cli.md), [best link](http://markheath.net/post/deploying-arm-templates-azure-cli).
