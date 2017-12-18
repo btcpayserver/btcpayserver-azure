@@ -4,14 +4,15 @@
     "parameters": {
       "adminUsername": {
         "type": "string",
+        "defaultValue": "btcpayserver",
         "metadata": {
-          "description": "SSH Username for the Virtual Machine."
+          "description": "The name of the SSH user."
         }
       },
       "adminPassword": {
         "type": "securestring",
         "metadata": {
-          "description": "SSH Password for the Virtual Machine."
+          "description": "The name of the SSH password."
         }
       },
       "vmSize": {
@@ -50,17 +51,17 @@
       "imagePublisher": "Canonical",
       "imageOffer": "UbuntuServer",
       "OSDiskName": "osdiskfordockersimple",
-      "nicName": "myVMNicD",
+      "nicName": "BTCPayServerNetworkInterface",
       "addressPrefix": "10.0.0.0/16",
       "subnetName": "Subnet",
       "subnetPrefix": "10.0.0.0/24",
       "storageAccountType": "Standard_LRS",
-      "publicIPAddressName": "myPublicIPD",
+      "publicIPAddressName": "BTCPayServerPublicIP",
       "publicIPAddressType": "Dynamic",
       "vmStorageAccountContainerName": "vhds",
-      "vmAccountStorageName" : "[uniqueString( resourceGroup().id, deployment().name )]",
-      "vmName": "MyDockerVM",
-      "virtualNetworkName": "MyVNETD",
+      "vmAccountStorageName" : "[concat(uniqueString( resourceGroup().id, deployment().name ), 'StorageAccount')]",
+      "vmName": "BTCPayServerVM",
+      "virtualNetworkName": "BTCPayServerNetwork",
       "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
       "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]"
     },
