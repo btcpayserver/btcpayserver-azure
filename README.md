@@ -68,6 +68,7 @@ Then, add a CNAME record in your name server pointing to `xxx.cloudapp.azure.com
 Connect then with SSH to your VM and run
 
 ```
+sudo -
 . changedomain.sh blah.example.com
 ```
 
