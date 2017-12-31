@@ -58,3 +58,17 @@ It will print you the DNS name of your server `myawesomebtcpay.southcentralus.cl
 # Deploy on Linux
 
 TODO: Write shell scripts using [Az tool](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/create-ssh-secured-vm-from-template), [other link](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-template-deploy-cli), [other link](https://github.com/MicrosoftDocs/azure-docs/blob/master/articles/azure-resource-manager/resource-group-template-deploy-cli.md), [best link](http://markheath.net/post/deploying-arm-templates-azure-cli).
+
+# How to change the domain name
+
+By default, you will have a domain name assigned ending with `xxx.cloudapp.azure.com`. Because Let's Encrypt does not allow us to get HTTPS certificate for the `azure.com` domain, you need your own domain.
+
+Then, add a CNAME record in your name server pointing to `xxx.cloudapp.azure.com`.
+
+Connect then with SSH to your VM and run
+
+```
+. changedomain.sh blah.example.com
+```
+
+This will change the settings of BTCPay and NGinx to use your domain. Upon restart, a new certificate for your domain will be requested by Let's encrypt.
