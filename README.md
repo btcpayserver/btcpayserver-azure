@@ -77,3 +77,12 @@ sudo su -
 ```
 
 This will change the settings of BTCPay and NGinx to use your domain. Upon restart, a new certificate for your domain will be requested by Let's encrypt.
+
+# How to update BTCPay
+
+Just pull the latest changes of the docker-compose and restart the docker service.
+
+```
+sudo su -
+cd `dirname $BTCPAY_DOCKER_COMPOSE` && git pull && docker-compose -f $BTCPAY_DOCKER_COMPOSE down && docker-compose -f $BTCPAY_DOCKER_COMPOSE up -d
+```
