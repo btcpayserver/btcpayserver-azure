@@ -2,29 +2,29 @@
 
 # It is running as root
 export AZURE_DNS="$1"
+export NBITCOIN_NETWORK="$2"
 export LETSENCRYPT_EMAIL="$3"
+export SUPPORTED_CRYPTO_CURRENCIES="$4"
+
 export BTCPAY_HOST="$AZURE_DNS"
-export BTCPAY_DOCKER_COMPOSE="`pwd`/btcpayserver-docker/Production/docker-compose.yml"
+export BTCPAY_DOCKER_COMPOSE="`pwd`/btcpayserver-docker/Production/docker-compose.$SUPPORTED_CRYPTO_CURRENCIES.yml"
 export ACME_CA_URI="https://acme-staging.api.letsencrypt.org/directory"
 
 echo "DNS NAME: $AZURE_DNS"
 
-if [ "$2" == "mainnet" ]; then
-    export BITCOIND_NETWORKPARAMETER="#mainnet"
-    export NBITCOIN_NETWORK="mainnet"
+if [ "$NBITCOIN_NETWORK" == "mainnet" ]; then
+    export BITCOIND_NETWORKPARAMETER="mainnet=1"
     export BITCOIND_COOKIEFILE=".cookie"
 fi
 
-if [ "$2" == "testnet" ]; then
+if [ "$NBITCOIN_NETWORK" == "testnet" ]; then
     export BITCOIND_NETWORKPARAMETER="testnet=1"
-    export NBITCOIN_NETWORK="testnet"
     export BITCOIND_COOKIEFILE="testnet3/.cookie"
 fi
 
 
-if [ "$2" == "regtest" ]; then
+if [ "$NBITCOIN_NETWORK" == "regtest" ]; then
     export BITCOIND_NETWORKPARAMETER="regtest=1"
-    export NBITCOIN_NETWORK="regtest"
     export BITCOIND_COOKIEFILE="regtest/.cookie"
 fi
 
