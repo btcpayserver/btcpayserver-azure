@@ -14,6 +14,7 @@ echo "ACME_CA_URI=\"$ACME_CA_URI\"" >> /etc/environment
 echo "BITCOIND_NETWORKPARAMETER=\"$BITCOIND_NETWORKPARAMETER\"" >> /etc/environment
 echo "NBITCOIN_NETWORK=\"$NBITCOIN_NETWORK\"" >> /etc/environment
 echo "BITCOIND_COOKIEFILE=\"$BITCOIND_COOKIEFILE\"" >> /etc/environment
+echo "LITECOIND_COOKIEFILE=\"$LITECOIND_COOKIEFILE\"" >> /etc/environment
 echo "LETSENCRYPT_EMAIL=\"$LETSENCRYPT_EMAIL\"" >> /etc/environment
 
 # Put the variable in /etc/profile.d when a user log interactively
@@ -26,6 +27,7 @@ echo "export ACME_CA_URI=\"$ACME_CA_URI\"" >> /etc/profile.d/btcpay-env.sh
 echo "export BITCOIND_NETWORKPARAMETER=\"$BITCOIND_NETWORKPARAMETER\"" >> /etc/profile.d/btcpay-env.sh
 echo "export NBITCOIN_NETWORK=\"$NBITCOIN_NETWORK\"" >> /etc/profile.d/btcpay-env.sh
 echo "export BITCOIND_COOKIEFILE=\"$BITCOIND_COOKIEFILE\"" >> /etc/profile.d/btcpay-env.sh
+echo "export LITECOIND_COOKIEFILE=\"$LITECOIND_COOKIEFILE\"" >> /etc/profile.d/btcpay-env.sh
 echo "export LETSENCRYPT_EMAIL=\"$LETSENCRYPT_EMAIL\"" >> /etc/profile.d/btcpay-env.sh
 
 docker-compose -f "$BTCPAY_DOCKER_COMPOSE" down
