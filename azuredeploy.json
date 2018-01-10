@@ -24,9 +24,9 @@
       },
       "vmSize": {
         "type": "string",
-        "defaultValue": "Standard_F1",
+        "defaultValue": "Standard_D1_v2",
         "metadata": {
-          "description": "VM size for the Docker host."
+          "description": "VM size for the Docker host. (see https://azureprice.net/)"
         }
       },
       "network": {
