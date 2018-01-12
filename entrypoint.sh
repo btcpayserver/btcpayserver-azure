@@ -7,7 +7,7 @@ export LETSENCRYPT_EMAIL="$3"
 export SUPPORTED_CRYPTO_CURRENCIES="$4"
 
 export DOWNLOAD_ROOT="`pwd`"
-export BTCPAY_ENV_FILE="`pwd`/btcpayserver-docker/Production/.env"
+export BTCPAY_ENV_FILE="`pwd`/.env"
 
 export BTCPAY_HOST="$AZURE_DNS"
 export BTCPAY_DOCKER_COMPOSE="`pwd`/btcpayserver-docker/Production/docker-compose.$SUPPORTED_CRYPTO_CURRENCIES.yml"
@@ -57,6 +57,7 @@ chmod +x /usr/local/bin/docker-compose
 # Clone btcpayserver
 git clone https://github.com/btcpayserver/btcpayserver-docker
 
+cd "`dirname $BTCPAY_ENV_FILE`"
 docker-compose -f "$BTCPAY_DOCKER_COMPOSE" up -d 
 
 # Schedule for reboot
@@ -75,6 +76,7 @@ stop on runlevel [!2345]
 
 script
     . /etc/profile.d/btcpay-env.sh
+    cd \"`dirname $BTCPAY_ENV_FILE`\"
     docker-compose -f \"$BTCPAY_DOCKER_COMPOSE\" up -d
 end script" > /etc/init/start_containers.conf
 
