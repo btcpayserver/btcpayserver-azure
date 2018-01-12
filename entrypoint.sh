@@ -12,35 +12,13 @@ export ACME_CA_URI="https://acme-staging.api.letsencrypt.org/directory"
 
 echo "DNS NAME: $AZURE_DNS"
 
-if [ "$NBITCOIN_NETWORK" == "mainnet" ]; then
-    export BITCOIND_NETWORKPARAMETER="mainnet=1"
-    export BITCOIND_COOKIEFILE=".cookie"
-    export LITECOIND_COOKIEFILE=".cookie"
-fi
-
-if [ "$NBITCOIN_NETWORK" == "testnet" ]; then
-    export BITCOIND_NETWORKPARAMETER="testnet=1"
-    export BITCOIND_COOKIEFILE="testnet3/.cookie"
-    export LITECOIND_COOKIEFILE="testnet4/.cookie"
-fi
-
-
-if [ "$NBITCOIN_NETWORK" == "regtest" ]; then
-    export BITCOIND_NETWORKPARAMETER="regtest=1"
-    export BITCOIND_COOKIEFILE="regtest/.cookie"
-    export LITECOIND_COOKIEFILE="regtest/.cookie"
-fi
-
 # Put the variable in /etc/environment for reboot
 cp /etc/environment /etc/environment.bak
 echo "AZURE_DNS=\"$AZURE_DNS\"" >> /etc/environment
 echo "BTCPAY_HOST=\"$BTCPAY_HOST\"" >> /etc/environment
 echo "BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE\"" >> /etc/environment
 echo "ACME_CA_URI=\"$ACME_CA_URI\"" >> /etc/environment
-echo "BITCOIND_NETWORKPARAMETER=\"$BITCOIND_NETWORKPARAMETER\"" >> /etc/environment
 echo "NBITCOIN_NETWORK=\"$NBITCOIN_NETWORK\"" >> /etc/environment
-echo "BITCOIND_COOKIEFILE=\"$BITCOIND_COOKIEFILE\"" >> /etc/environment
-echo "LITECOIND_COOKIEFILE=\"$LITECOIND_COOKIEFILE\"" >> /etc/environment
 echo "LETSENCRYPT_EMAIL=\"$LETSENCRYPT_EMAIL\"" >> /etc/environment
 
 # Put the variable in /etc/profile.d when a user log interactively
@@ -50,10 +28,7 @@ echo "export AZURE_DNS=\"$AZURE_DNS\"" >> /etc/profile.d/btcpay-env.sh
 echo "export BTCPAY_HOST=\"$BTCPAY_HOST\"" >> /etc/profile.d/btcpay-env.sh
 echo "export BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE\"" >> /etc/profile.d/btcpay-env.sh
 echo "export ACME_CA_URI=\"$ACME_CA_URI\"" >> /etc/profile.d/btcpay-env.sh
-echo "export BITCOIND_NETWORKPARAMETER=\"$BITCOIND_NETWORKPARAMETER\"" >> /etc/profile.d/btcpay-env.sh
 echo "export NBITCOIN_NETWORK=\"$NBITCOIN_NETWORK\"" >> /etc/profile.d/btcpay-env.sh
-echo "export BITCOIND_COOKIEFILE=\"$BITCOIND_COOKIEFILE\"" >> /etc/profile.d/btcpay-env.sh
-echo "export LITECOIND_COOKIEFILE=\"$LITECOIND_COOKIEFILE\"" >> /etc/profile.d/btcpay-env.sh
 echo "export LETSENCRYPT_EMAIL=\"$LETSENCRYPT_EMAIL\"" >> /etc/profile.d/btcpay-env.sh
 
 # Install docker (https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#set-up-the-repository) and docker-compose 
