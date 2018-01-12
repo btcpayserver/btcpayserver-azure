@@ -1,7 +1,7 @@
 
 export NEW_HOST="$1"
 
-echo "Changing domain from \"$BTCPAY_HOST\" to \"$NEW_HOST\""
+echo "Changing domain to \"$NEW_HOST\""
 
 export BTCPAY_HOST="$NEW_HOST"
 export ACME_CA_URI="https://acme-v01.api.letsencrypt.org/directory"

@@ -91,5 +91,5 @@ chmod +x changedomain.sh
 chmod +x btcpay-restart.sh
 chmod +x btcpay-update.sh
 ln -s `pwd`/changedomain.sh /usr/bin/changedomain.sh
-ln -s `pwd`/btcpay_restart.sh /usr/bin/btcpay-restart.sh
-ln -s `pwd`/btcpay_update.sh /usr/bin/btcpay-update.sh
+ln -s `pwd`/btcpay-restart.sh /usr/bin/btcpay-restart.sh
+ln -s `pwd`/btcpay-update.sh /usr/bin/btcpay-update.sh
