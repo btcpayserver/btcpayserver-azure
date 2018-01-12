@@ -15,13 +15,6 @@ export ACME_CA_URI="https://acme-staging.api.letsencrypt.org/directory"
 
 echo "DNS NAME: $AZURE_DNS"
 
-
-touch $BTCPAY_ENV_FILE
-echo "BTCPAY_HOST=$BTCPAY_HOST" >> $BTCPAY_ENV_FILE
-echo "ACME_CA_URI=$ACME_CA_URI" >> $BTCPAY_ENV_FILE
-echo "NBITCOIN_NETWORK=$NBITCOIN_NETWORK" >> $BTCPAY_ENV_FILE
-echo "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" >> $BTCPAY_ENV_FILE
-
 # Put the variable in /etc/environment for reboot
 cp /etc/environment /etc/environment.bak
 echo "AZURE_DNS=\"$AZURE_DNS\"" >> /etc/environment
@@ -86,6 +79,13 @@ script
 end script" > /etc/init/start_containers.conf
 
 initctl reload-configuration
+
+# Set .env file
+touch $BTCPAY_ENV_FILE
+echo "BTCPAY_HOST=$BTCPAY_HOST" >> $BTCPAY_ENV_FILE
+echo "ACME_CA_URI=$ACME_CA_URI" >> $BTCPAY_ENV_FILE
+echo "NBITCOIN_NETWORK=$NBITCOIN_NETWORK" >> $BTCPAY_ENV_FILE
+echo "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" >> $BTCPAY_ENV_FILE
 
 chmod +x changedomain.sh
 chmod +x btcpay-restart.sh
