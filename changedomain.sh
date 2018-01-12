@@ -15,6 +15,7 @@ echo "NBITCOIN_NETWORK=\"$NBITCOIN_NETWORK\"" >> /etc/environment
 echo "LETSENCRYPT_EMAIL=\"$LETSENCRYPT_EMAIL\"" >> /etc/environment
 
 # Put the variable in /etc/profile.d when a user log interactively
+rm "/etc/profile.d/btcpay-env.sh"
 touch "/etc/profile.d/btcpay-env.sh"
 echo "#!/bin/bash" >> /etc/profile.d/btcpay-env.sh
 echo "export AZURE_DNS=\"$AZURE_DNS\"" >> /etc/profile.d/btcpay-env.sh
