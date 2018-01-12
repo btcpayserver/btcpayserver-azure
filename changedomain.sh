@@ -9,7 +9,6 @@ export ACME_CA_URI="https://acme-v01.api.letsencrypt.org/directory"
 # .env file, last entry win, so just add to the file
 echo "BTCPAY_HOST=$BTCPAY_HOST" >> $BTCPAY_ENV_FILE
 echo "ACME_CA_URI=$ACME_CA_URI" >> $BTCPAY_ENV_FILE
-echo "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" >> $BTCPAY_ENV_FILE
 
 docker-compose -f "$BTCPAY_DOCKER_COMPOSE" down
 docker-compose -f "$BTCPAY_DOCKER_COMPOSE" up -d
