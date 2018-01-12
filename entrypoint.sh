@@ -6,30 +6,36 @@ export NBITCOIN_NETWORK="$2"
 export LETSENCRYPT_EMAIL="$3"
 export SUPPORTED_CRYPTO_CURRENCIES="$4"
 
+export DOWNLOAD_ROOT="`pwd`"
+export BTCPAY_ENV_FILE="`pwd`/btcpayserver-docker/Production/.env"
+
 export BTCPAY_HOST="$AZURE_DNS"
 export BTCPAY_DOCKER_COMPOSE="`pwd`/btcpayserver-docker/Production/docker-compose.$SUPPORTED_CRYPTO_CURRENCIES.yml"
 export ACME_CA_URI="https://acme-staging.api.letsencrypt.org/directory"
 
 echo "DNS NAME: $AZURE_DNS"
 
+
+touch $BTCPAY_ENV_FILE
+echo "BTCPAY_HOST=$BTCPAY_HOST" >> $BTCPAY_ENV_FILE
+echo "ACME_CA_URI=$ACME_CA_URI" >> $BTCPAY_ENV_FILE
+echo "NBITCOIN_NETWORK=$NBITCOIN_NETWORK" >> $BTCPAY_ENV_FILE
+echo "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" >> $BTCPAY_ENV_FILE
+
 # Put the variable in /etc/environment for reboot
 cp /etc/environment /etc/environment.bak
 echo "AZURE_DNS=\"$AZURE_DNS\"" >> /etc/environment
-echo "BTCPAY_HOST=\"$BTCPAY_HOST\"" >> /etc/environment
 echo "BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE\"" >> /etc/environment
-echo "ACME_CA_URI=\"$ACME_CA_URI\"" >> /etc/environment
-echo "NBITCOIN_NETWORK=\"$NBITCOIN_NETWORK\"" >> /etc/environment
-echo "LETSENCRYPT_EMAIL=\"$LETSENCRYPT_EMAIL\"" >> /etc/environment
+echo "DOWNLOAD_ROOT=\"$DOWNLOAD_ROOT\"" >> /etc/environment
+echo "BTCPAY_ENV_FILE=\"$BTCPAY_ENV_FILE\"" >> /etc/environment
+
 
 # Put the variable in /etc/profile.d when a user log interactively
 touch "/etc/profile.d/btcpay-env.sh"
-echo "#!/bin/bash" >> /etc/profile.d/btcpay-env.sh
-echo "export AZURE_DNS=\"$AZURE_DNS\"" >> /etc/profile.d/btcpay-env.sh
-echo "export BTCPAY_HOST=\"$BTCPAY_HOST\"" >> /etc/profile.d/btcpay-env.sh
-echo "export BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE\"" >> /etc/profile.d/btcpay-env.sh
-echo "export ACME_CA_URI=\"$ACME_CA_URI\"" >> /etc/profile.d/btcpay-env.sh
-echo "export NBITCOIN_NETWORK=\"$NBITCOIN_NETWORK\"" >> /etc/profile.d/btcpay-env.sh
-echo "export LETSENCRYPT_EMAIL=\"$LETSENCRYPT_EMAIL\"" >> /etc/profile.d/btcpay-env.sh
+echo "AZURE_DNS=\"$AZURE_DNS\"" >> /etc/profile.d/btcpay-env.sh
+echo "BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE\"" >> /etc/profile.d/btcpay-env.sh
+echo "DOWNLOAD_ROOT=\"$DOWNLOAD_ROOT\"" >> /etc/profile.d/btcpay-env.sh
+echo "BTCPAY_ENV_FILE=\"$BTCPAY_ENV_FILE\"" >> /etc/profile.d/btcpay-env.sh
 
 # Install docker (https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#set-up-the-repository) and docker-compose 
 apt-get update 2>error
@@ -58,7 +64,7 @@ chmod +x /usr/local/bin/docker-compose
 # Clone btcpayserver
 git clone https://github.com/btcpayserver/btcpayserver-docker
 
-docker-compose -f "$BTCPAY_DOCKER_COMPOSE" up -d
+docker-compose -f "$BTCPAY_DOCKER_COMPOSE" up -d 
 
 # Schedule for reboot
 
@@ -82,4 +88,8 @@ end script" > /etc/init/start_containers.conf
 initctl reload-configuration
 
 chmod +x changedomain.sh
+chmod +x btcpay-restart.sh
+chmod +x btcpay-update.sh
 ln -s `pwd`/changedomain.sh /usr/bin/changedomain.sh
+ln -s `pwd`/btcpay_restart.sh /usr/bin/btcpay-restart.sh
+ln -s `pwd`/btcpay_update.sh /usr/bin/btcpay-update.sh

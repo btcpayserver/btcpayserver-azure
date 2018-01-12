@@ -73,7 +73,7 @@ Connect then with SSH to your VM and run
 
 ```
 sudo su -
-. changedomain.sh blah.example.com
+changedomain.sh blah.example.com
 ```
 
 This will change the settings of BTCPay and NGinx to use your domain. Upon restart, a new certificate for your domain will be requested by Let's encrypt.
@@ -84,5 +84,21 @@ Just pull the latest changes of the docker-compose and restart the docker servic
 
 ```
 sudo su -
-cd `dirname $BTCPAY_DOCKER_COMPOSE` && git pull && docker-compose -f $BTCPAY_DOCKER_COMPOSE down && docker-compose -f $BTCPAY_DOCKER_COMPOSE up -d
+btcpay-update.sh
+```
+
+# How to restart BTCPay
+
+Reboot docker:
+
+```
+sudo su -
+btcpay-restart.sh
+```
+
+Or reboot the server:
+
+```
+sudo su -
+reboot
 ```

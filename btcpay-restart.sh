@@ -1,0 +1,1 @@
+docker-compose -f $BTCPAY_DOCKER_COMPOSE down && docker-compose -f $BTCPAY_DOCKER_COMPOSE up -d
