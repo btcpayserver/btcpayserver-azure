@@ -52,20 +52,6 @@
           "description": "Supported cryptocurrencies"
         }
       },
-      "repository": {
-        "type": "string",
-        "defaultValue": "https://github.com/btcpayserver/btcpayserver-docker",
-        "metadata": {
-          "description": "The GIT repository to pull the dockers from"
-        }
-      },
-      "branch": {
-        "type": "string",
-        "defaultValue": "stable",
-        "metadata": {
-          "description": "The branch from the GIT repository to use"
-        }
-      },
       "ubuntuOSVersion": {
         "type": "string",
         "defaultValue": "14.04.4-LTS",
@@ -77,7 +63,21 @@
           "15.10",
           "16.04.0-LTS"
         ]
-      }
+      },
+      "repository": {
+        "type": "string",
+        "defaultValue": "https://github.com/btcpayserver/btcpayserver-docker",
+        "metadata": {
+          "description": "The GIT repository to pull the docker-compose from"
+        }
+      },
+      "branch": {
+        "type": "string",
+        "defaultValue": "stable",
+        "metadata": {
+          "description": "The branch from the GIT repository to use"
+        }
+      }      
     },
     "variables": {
       "imagePublisher": "Canonical",
