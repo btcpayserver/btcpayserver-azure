@@ -153,6 +153,28 @@ NBITCOIN_NETWORK=testnet
 LETSENCRYPT_EMAIL=me@example.com
 ```
 
+Example of `/etc/init/start_containers.conf` file:
+
+```
+# File is saved under /etc/init/start_containers.conf
+# After file is modified, update config with : $ initctl reload-configuration
+
+description     "Start containers (see http://askubuntu.com/a/22105 and http://askubuntu.com/questions/612928/how-to-run-docker-compose-at-bootup)"
+
+start on filesystem and started docker
+stop on runlevel [!2345]
+
+# if you want it to automatically restart if it crashes, leave the next line in
+# respawn # might cause over charge
+
+script
+    . /etc/profile.d/btcpay-env.sh
+    cd "/var/lib/waagent/custom-script/download/0"
+    docker-compose -f "/var/lib/waagent/custom-script/download/0/btcpayserver-docker/Production/docker-compose.btc-ltc.yml" up -d
+end script
+```
+
+Note that `AZURE_DNS` is not really used anywhere except for debugging purpose.
 When you want to start/stop docker, for the environment variables in `.env` to be taken into account, you need to start from its folder:
 
 ```
