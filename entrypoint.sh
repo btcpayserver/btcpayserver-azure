@@ -23,8 +23,6 @@ echo "AZURE_DNS=\"$AZURE_DNS\"" >> /etc/environment
 echo "BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE\"" >> /etc/environment
 echo "DOWNLOAD_ROOT=\"$DOWNLOAD_ROOT\"" >> /etc/environment
 echo "BTCPAY_ENV_FILE=\"$BTCPAY_ENV_FILE\"" >> /etc/environment
-echo "BTCPAY_DOCKER_REPO=\"$BTCPAY_DOCKER_REPO\"" >> /etc/environment
-echo "BTCPAY_DOCKER_REPO_BRANCH=\"$BTCPAY_DOCKER_REPO_BRANCH\"" >> /etc/environment
 
 
 # Put the variable in /etc/profile.d when a user log interactively
@@ -33,8 +31,6 @@ echo "export AZURE_DNS=\"$AZURE_DNS\"" >> /etc/profile.d/btcpay-env.sh
 echo "export BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE\"" >> /etc/profile.d/btcpay-env.sh
 echo "export DOWNLOAD_ROOT=\"$DOWNLOAD_ROOT\"" >> /etc/profile.d/btcpay-env.sh
 echo "export BTCPAY_ENV_FILE=\"$BTCPAY_ENV_FILE\"" >> /etc/profile.d/btcpay-env.sh
-echo "export BTCPAY_DOCKER_REPO=\"$BTCPAY_DOCKER_REPO\"" >> /etc/profile.d/btcpay-env.sh
-echo "export BTCPAY_DOCKER_REPO_BRANCH=\"$BTCPAY_DOCKER_REPO_BRANCH\"" >> /etc/profile.d/btcpay-env.sh
 
 # Install docker (https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#set-up-the-repository) and docker-compose 
 apt-get update 2>error
