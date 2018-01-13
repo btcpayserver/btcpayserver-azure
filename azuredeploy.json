@@ -45,11 +45,25 @@
         "type": "string",
         "allowedValues": [
           "btc",
-          "btc-ltc",
+          "btc-ltc"
         ],
         "defaultValue": "btc-ltc",
         "metadata": {
           "description": "Supported cryptocurrencies"
+        }
+      },
+      "repository": {
+        "type": "string",
+        "defaultValue": "https://github.com/btcpayserver/btcpayserver-docker",
+        "metadata": {
+          "description": "The GIT repository to pull the dockers from"
+        }
+      },
+      "branch": {
+        "type": "string",
+        "defaultValue": "stable",
+        "metadata": {
+          "description": "The branch from the GIT repository to use"
         }
       },
       "ubuntuOSVersion": {
@@ -216,7 +230,7 @@
                             "https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/changedomain.sh",
                             "https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/btcpay-restart.sh",
                             "https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/btcpay-update.sh"],
-              "commandToExecute" : "[concat('./entrypoint.sh ', reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn, ' ', parameters('network'), ' ', parameters('notificationEmail'), ' ', parameters('cryptoCurrencies'))]"
+              "commandToExecute" : "[concat('./entrypoint.sh ', reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn, ' ', parameters('network'), ' ', parameters('notificationEmail'), ' ', parameters('cryptoCurrencies'),' ', parameters('repository'), ' ', parameters('branch'))]"
           }
         }
       }
