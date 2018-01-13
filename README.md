@@ -138,7 +138,7 @@ DOWNLOAD_ROOT="/var/lib/waagent/custom-script/download/0"
 Example of `/etc/profile.d/btcpay-env.sh`:
 
 ```
-export AZURE_DNS="test-btc-ltc.forkbitpay.ninja"
+export AZURE_DNS="dwoiqdwqb.westeurope.cloudapp.azure.com"
 export BTCPAY_DOCKER_COMPOSE="/var/lib/waagent/custom-script/download/0/btcpayserver-docker/Production/docker-compose.btc-ltc.yml"
 export DOWNLOAD_ROOT="/var/lib/waagent/custom-script/download/0"
 export BTCPAY_ENV_FILE="/var/lib/waagent/custom-script/download/0/.env"
