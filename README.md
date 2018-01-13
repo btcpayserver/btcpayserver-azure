@@ -102,3 +102,60 @@ Or reboot the server:
 sudo su -
 reboot
 ```
+
+# Under the hood
+
+Here are the step on provisioning done by Azure (so you can do it yourelf):
+
+* Azure provision a new virutal machine
+* Then copy all the sh files of this repository inside the new virtual machine
+* Azure then execute `entrypoint.sh` passing the following arguments taken from the wizard:
+    1. The initial DNS name
+    2. The network (mainnet, testnet, regtest)
+    3. Let's encrypt email
+    4. Supported crypto currencies separated by '-'
+    5. Docker repository url used for fetching the docker-compose
+    6. The branch of this repository
+* `entrypoint.sh` does the following actions:
+    1. Copy the parameters inside `/etc/environment` and `/etc/profile.d/btcpay-env.sh` so they can be accessed via environment variable globally
+    2. Add also those parameters  in the `.env` file which will be used by the `docker-compose`
+    3. Install `docker-compose` and `git`
+    4. Clone the `btcpayserver-docker` repository
+    5. Configure upstart in `/etc/init/start_containers.conf` to start `docker-compose` if the machine reboot
+    6. Start `docker-compose` in the directory of the `.env` as working directory
+    7. Create symbolic links to `/usr/bin` to the other `btcpay-*.sh` utility scripts
+
+Example of `/etc/environment`:
+
+```
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+AZURE_DNS="dwoiqdwqb.westeurope.cloudapp.azure.com"
+BTCPAY_DOCKER_COMPOSE="/var/lib/waagent/custom-script/download/0/btcpayserver-docker/Production/docker-compose.btc-ltc.yml"
+BTCPAY_ENV_FILE="/var/lib/waagent/custom-script/download/0/.env"
+DOWNLOAD_ROOT="/var/lib/waagent/custom-script/download/0"
+```
+
+Example of `/etc/profile.d/btcpay-env.sh`:
+
+```
+export AZURE_DNS="test-btc-ltc.forkbitpay.ninja"
+export BTCPAY_DOCKER_COMPOSE="/var/lib/waagent/custom-script/download/0/btcpayserver-docker/Production/docker-compose.btc-ltc.yml"
+export DOWNLOAD_ROOT="/var/lib/waagent/custom-script/download/0"
+export BTCPAY_ENV_FILE="/var/lib/waagent/custom-script/download/0/.env"
+```
+
+Example of `.env` file:
+
+```
+BTCPAY_HOST=test-btc-ltc.forkbitpay.ninja
+ACME_CA_URI=https://acme-v01.api.letsencrypt.org/directory
+NBITCOIN_NETWORK=testnet
+LETSENCRYPT_EMAIL=me@example.com
+```
+
+When you want to start/stop docker, for the environment variables in `.env` to be taken into account, you need to start from its folder:
+
+```
+cd "`dirname $BTCPAY_ENV_FILE`"
+docker-compose -f "$BTCPAY_DOCKER_COMPOSE" up
+```
