@@ -107,7 +107,7 @@ reboot
 
 Here are the step on provisioning done by Azure (so you can do it yourelf):
 
-* Azure provision a new virutal machine
+* Azure provision a new virtual machine
 * Then copy all the sh files of this repository inside the new virtual machine
 * Azure then execute `entrypoint.sh` passing the following arguments taken from the wizard:
     1. The initial DNS name
