@@ -169,8 +169,8 @@ stop on runlevel [!2345]
 
 script
     . /etc/profile.d/btcpay-env.sh
-    cd "/var/lib/waagent/custom-script/download/0"
-    docker-compose -f "/var/lib/waagent/custom-script/download/0/btcpayserver-docker/Production/docker-compose.btc-ltc.yml" up -d
+    cd "`dirname $BTCPAY_ENV_FILE`"
+    docker-compose -f "$BTCPAY_DOCKER_COMPOSE" up -d
 end script
 ```
 
