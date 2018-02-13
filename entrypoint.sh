@@ -62,9 +62,6 @@ cd btcpayserver-docker
 git checkout $BTCPAY_DOCKER_REPO_BRANCH
 cd ..
 
-cd "`dirname $BTCPAY_ENV_FILE`"
-docker-compose -f "$BTCPAY_DOCKER_COMPOSE" up -d 
-
 # Schedule for reboot
 
 echo "
@@ -93,6 +90,9 @@ echo "BTCPAY_HOST=$BTCPAY_HOST" >> $BTCPAY_ENV_FILE
 echo "ACME_CA_URI=$ACME_CA_URI" >> $BTCPAY_ENV_FILE
 echo "NBITCOIN_NETWORK=$NBITCOIN_NETWORK" >> $BTCPAY_ENV_FILE
 echo "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" >> $BTCPAY_ENV_FILE
+
+cd "`dirname $BTCPAY_ENV_FILE`"
+docker-compose -f "$BTCPAY_DOCKER_COMPOSE" up -d 
 
 chmod +x changedomain.sh
 chmod +x btcpay-restart.sh
