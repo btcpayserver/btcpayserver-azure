@@ -41,15 +41,25 @@
           "description": "Choose nainnet for production, or testnet for testing"
         }
       },
-      "cryptoCurrencies": {
-        "type": "string",
-        "allowedValues": [
-          "btc",
-          "btc-ltc"
-        ],
-        "defaultValue": "btc-ltc",
+      "acceptBTC": {
+        "type": "bool",
+        "defaultValue": true,
         "metadata": {
-          "description": "Supported cryptocurrencies"
+          "description": "Accept Bitcoin"
+        }
+      },
+      "acceptLTC": {
+        "type": "bool",
+        "defaultValue": false,
+        "metadata": {
+          "description": "Accept Litecoin"
+        }
+      },
+      "internalCLightning": {
+        "type": "bool",
+        "defaultValue": false,
+        "metadata": {
+          "description": "Support internal clightning node (beta)"
         }
       },
       "ubuntuOSVersion": {
@@ -284,11 +294,11 @@
           "autoUpgradeMinorVersion": true,
           "settings": 
           { 
-              "fileUris" : ["https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/entrypoint.sh", 
-                            "https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/changedomain.sh",
-                            "https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/btcpay-restart.sh",
-                            "https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/btcpay-update.sh"],
-              "commandToExecute" : "[concat('./entrypoint.sh ', reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn, ' ', parameters('network'), ' ', parameters('notificationEmail'), ' ', parameters('cryptoCurrencies'),' ', parameters('repository'), ' ', parameters('branch'))]"
+              "fileUris" : ["https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/lnsupport/entrypoint.sh", 
+                            "https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/lnsupport/changedomain.sh",
+                            "https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/lnsupport/btcpay-restart.sh",
+                            "https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/lnsupport/btcpay-update.sh"],
+              "commandToExecute" : "[concat('./entrypoint.sh ', reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn, ' ', parameters('network'), ' ', parameters('notificationEmail'), ' ', parameters('repository'), ' ', parameters('branch'), ' ', parameters('acceptBTC'), ' ', parameters('acceptLTC'), ' ', parameters('internalCLightning'))]"
           }
         }
       }
