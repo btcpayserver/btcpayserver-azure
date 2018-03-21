@@ -10,6 +10,8 @@ export USE_BTC="$6"
 export USE_LTC="$7"
 export USE_CLIGHTNING="$8"
 
+echo ""
+echo "-------SETUP-----------"
 echo "Parameters passed:"
 echo "AZURE_DNS:$AZURE_DNS"
 echo "NBITCOIN_NETWORK:$NBITCOIN_NETWORK"
@@ -19,24 +21,26 @@ echo "BTCPAY_DOCKER_REPO_BRANCH:$BTCPAY_DOCKER_REPO_BRANCH"
 echo "USE_BTC:$USE_BTC"
 echo "USE_LTC:$USE_LTC"
 echo "USE_CLIGHTNING:$USE_CLIGHTNING"
+echo "----------------------"
+echo ""
 
 export DOWNLOAD_ROOT="`pwd`"
 export BTCPAY_ENV_FILE="`pwd`/.env"
 export SUPPORTED_CRYPTO_CURRENCIES=""
 
-if [ USE_BTC == "true" ]; then
+if [ "$USE_BTC" == "True" ]; then
     SUPPORTED_CRYPTO_CURRENCIES="$SUPPORTED_CRYPTO_CURRENCIES-btc"
 fi
 
-if [ USE_LTC == "true" ]; then
+if [ "$USE_LTC" == "True" ]; then
     SUPPORTED_CRYPTO_CURRENCIES="$SUPPORTED_CRYPTO_CURRENCIES-ltc"
 fi
 
-if [ USE_CLIGHTNING == "true" ]; then
+if [ "$USE_CLIGHTNING" == "True" ]; then
     SUPPORTED_CRYPTO_CURRENCIES="$SUPPORTED_CRYPTO_CURRENCIES-clightning"
 fi
 
-if [ SUPPORTED_CRYPTO_CURRENCIES == "" ]; then
+if [ "$SUPPORTED_CRYPTO_CURRENCIES" == "" ]; then
     SUPPORTED_CRYPTO_CURRENCIES="-btc"
 fi
 
