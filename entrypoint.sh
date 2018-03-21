@@ -37,8 +37,11 @@ if [ USE_CLIGHTNING == "true" ]; then
 fi
 
 if [ SUPPORTED_CRYPTO_CURRENCIES == "" ]; then
-    SUPPORTED_CRYPTO_CURRENCIES="btc"
+    SUPPORTED_CRYPTO_CURRENCIES="-btc"
 fi
+
+# Remove superflous -
+SUPPORTED_CRYPTO_CURRENCIES=`echo $SUPPORTED_CRYPTO_CURRENCIES | sed 's/^-\(.*\)/\1/'`
 
 export BTCPAY_HOST="$AZURE_DNS"
 export BTCPAY_DOCKER_COMPOSE="`pwd`/btcpayserver-docker/Production/docker-compose.$SUPPORTED_CRYPTO_CURRENCIES.yml"
