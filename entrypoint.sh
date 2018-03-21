@@ -36,12 +36,12 @@ if [ "$USE_LTC" == "True" ]; then
     SUPPORTED_CRYPTO_CURRENCIES="$SUPPORTED_CRYPTO_CURRENCIES-ltc"
 fi
 
-if [ "$USE_CLIGHTNING" == "True" ]; then
-    SUPPORTED_CRYPTO_CURRENCIES="$SUPPORTED_CRYPTO_CURRENCIES-clightning"
-fi
-
 if [ "$SUPPORTED_CRYPTO_CURRENCIES" == "" ]; then
     SUPPORTED_CRYPTO_CURRENCIES="-btc"
+fi
+
+if [ "$USE_CLIGHTNING" == "True" ]; then
+    SUPPORTED_CRYPTO_CURRENCIES="$SUPPORTED_CRYPTO_CURRENCIES-clightning"
 fi
 
 # Remove superflous -
