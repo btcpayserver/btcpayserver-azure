@@ -233,9 +233,9 @@
               }
             },
             {
-              "name": "Lightning",
+              "name": "LightningBTC",
               "properties": {
-                "description": "Allow inbound Lighning Network access",
+                "description": "Allow inbound Lighning Network access (BTC)",
                 "protocol": "Tcp",
                 "sourcePortRange": "*",
                 "destinationPortRange": "9735",
@@ -243,6 +243,20 @@
                 "destinationAddressPrefix": "*",
                 "access": "Allow",
                 "priority": 103,
+                "direction": "Inbound"
+              }
+            },
+            {
+              "name": "LightningLTC",
+              "properties": {
+                "description": "Allow inbound Lighning Network access (LTC)",
+                "protocol": "Tcp",
+                "sourcePortRange": "*",
+                "destinationPortRange": "9736",
+                "sourceAddressPrefix": "Internet",
+                "destinationAddressPrefix": "*",
+                "access": "Allow",
+                "priority": 104,
                 "direction": "Inbound"
               }
             }
