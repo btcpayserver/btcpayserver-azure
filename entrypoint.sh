@@ -11,9 +11,6 @@ export USE_BTC="$7"
 export USE_LTC="$8"
 export USE_CLIGHTNING="$9"
 
-# Remove superflous s
-LIGHTNING_ALIAS=`echo $LIGHTNING_ALIAS | sed 's/^s\(.*\)/\1/'`
-
 echo ""
 echo "-------SETUP-----------"
 echo "Parameters passed:"

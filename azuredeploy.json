@@ -64,6 +64,7 @@
       },
       "lightningNodeAlias": {
         "type": "string",
+        "defaultValue": "",
         "metadata": {
           "description": "Public alias of your lightning node (Optional)"
         }
@@ -332,7 +333,7 @@
                             "https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/lnsupport/changedomain.sh",
                             "https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/lnsupport/btcpay-restart.sh",
                             "https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/lnsupport/btcpay-update.sh"],
-              "commandToExecute" : "[concat('./entrypoint.sh ', reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn, ' ', parameters('network'), ' ', parameters('notificationEmail'), ' ', parameters('repository'), ' ', parameters('branch'), ' ', concat('s', parameters('lightningNodeAlias')), ' ', parameters('acceptBTC'), ' ', parameters('acceptLTC'), ' ', parameters('internalCLightning'))]"
+              "commandToExecute" : "[concat('./entrypoint.sh ', reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn, ' ', parameters('network'), ' ', parameters('notificationEmail'), ' ', parameters('repository'), ' ', parameters('branch'), ' \"', parameters('lightningNodeAlias'), '\" ', parameters('acceptBTC'), ' ', parameters('acceptLTC'), ' ', parameters('internalCLightning'))]"
           }
         }
       }
