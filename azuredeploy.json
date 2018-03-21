@@ -231,6 +231,20 @@
                 "priority": 102,
                 "direction": "Inbound"
               }
+            },
+            {
+              "name": "Lightning",
+              "properties": {
+                "description": "Allow inbound Lighning Network access",
+                "protocol": "Tcp",
+                "sourcePortRange": "*",
+                "destinationPortRange": "9735",
+                "sourceAddressPrefix": "Internet",
+                "destinationAddressPrefix": "*",
+                "access": "Allow",
+                "priority": 103,
+                "direction": "Inbound"
+              }
             }
           ]
         }
