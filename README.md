@@ -103,6 +103,17 @@ sudo su -
 reboot
 ```
 
+# How to update the btcpay-* tools
+
+```
+sudo su -
+cd $DOWNLOAD_ROOT
+git clone https://github.com/btcpayserver/btcpayserver-azure
+cd btcpayserver-azure
+git pull
+cp *.sh ..
+```
+
 # Under the hood
 
 Here are the step on provisioning done by Azure (so you can do it yourelf):
