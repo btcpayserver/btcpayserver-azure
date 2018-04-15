@@ -108,7 +108,7 @@ reboot
 ```
 sudo su -
 cd $DOWNLOAD_ROOT
-if [ ! -d "btcpayserver-azure" ];
+if [ ! -d "btcpayserver-azure" ]; then
     git clone https://github.com/btcpayserver/btcpayserver-azure
 fi
 cd btcpayserver-azure
