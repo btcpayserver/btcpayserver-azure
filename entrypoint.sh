@@ -1,15 +1,19 @@
 #!/bin/bash
 
 # It is running as root
-export AZURE_DNS="$1"
-NBITCOIN_NETWORK="$2"
-LETSENCRYPT_EMAIL="$3"
-BTCPAY_DOCKER_REPO="$4"
-BTCPAY_DOCKER_REPO_BRANCH="$5"
-LIGHTNING_ALIAS="$6"
-USE_BTC="$7"
-USE_LTC="$8"
-USE_CLIGHTNING="$9"
+
+: "${AZURE_DNS:=$1}"
+: "${NBITCOIN_NETWORK:=$2}"
+: "${LETSENCRYPT_EMAIL:=$3}"
+: "${BTCPAY_DOCKER_REPO:=$4}"
+: "${BTCPAY_DOCKER_REPO_BRANCH:=$5}"
+: "${LIGHTNING_ALIAS:=$6}"
+: "${USE_BTC:=$7}"
+: "${USE_LTC:=$8}"
+: "${USE_CLIGHTNING:=$9}"
+: "${ACME_CA_URI:=https://acme-staging.api.letsencrypt.org/directory}"
+
+DOWNLOAD_ROOT="`pwd`"
 
 echo ""
 echo "-------SETUP-----------"
@@ -24,10 +28,12 @@ echo "USE_BTC:$USE_BTC"
 echo "USE_LTC:$USE_LTC"
 echo "USE_CLIGHTNING:$USE_CLIGHTNING"
 echo "----------------------"
+echo "ACME_CA_URI:$ACME_CA_URI"
+echo "DOWNLOAD_ROOT:$DOWNLOAD_ROOT"
+echo "----------------------"
 echo ""
 
-export DOWNLOAD_ROOT="`pwd`"
-export BTCPAY_ENV_FILE="`pwd`/.env"
+BTCPAY_ENV_FILE="`pwd`/.env"
 SUPPORTED_CRYPTO_CURRENCIES=""
 
 if [ "$USE_BTC" == "True" ]; then
@@ -50,10 +56,12 @@ fi
 SUPPORTED_CRYPTO_CURRENCIES=`echo $SUPPORTED_CRYPTO_CURRENCIES | sed 's/^-\(.*\)/\1/'`
 
 BTCPAY_HOST="$AZURE_DNS"
-export BTCPAY_DOCKER_COMPOSE="`pwd`/btcpayserver-docker/Production/docker-compose.$SUPPORTED_CRYPTO_CURRENCIES.yml"
-ACME_CA_URI="https://acme-staging.api.letsencrypt.org/directory"
+BTCPAY_DOCKER_COMPOSE="`pwd`/btcpayserver-docker/Production/docker-compose.$SUPPORTED_CRYPTO_CURRENCIES.yml"
 
-echo "DNS NAME: $AZURE_DNS"
+export AZURE_DNS
+export BTCPAY_DOCKER_COMPOSE
+export DOWNLOAD_ROOT
+export BTCPAY_ENV_FILE
 
 # Put the variable in /etc/environment for reboot
 cp /etc/environment /etc/environment.bak
