@@ -2,14 +2,14 @@
 
 # It is running as root
 export AZURE_DNS="$1"
-export NBITCOIN_NETWORK="$2"
-export LETSENCRYPT_EMAIL="$3"
-export BTCPAY_DOCKER_REPO="$4"
-export BTCPAY_DOCKER_REPO_BRANCH="$5"
-export LIGHTNING_ALIAS="$6"
-export USE_BTC="$7"
-export USE_LTC="$8"
-export USE_CLIGHTNING="$9"
+NBITCOIN_NETWORK="$2"
+LETSENCRYPT_EMAIL="$3"
+BTCPAY_DOCKER_REPO="$4"
+BTCPAY_DOCKER_REPO_BRANCH="$5"
+LIGHTNING_ALIAS="$6"
+USE_BTC="$7"
+USE_LTC="$8"
+USE_CLIGHTNING="$9"
 
 echo ""
 echo "-------SETUP-----------"
@@ -28,7 +28,7 @@ echo ""
 
 export DOWNLOAD_ROOT="`pwd`"
 export BTCPAY_ENV_FILE="`pwd`/.env"
-export SUPPORTED_CRYPTO_CURRENCIES=""
+SUPPORTED_CRYPTO_CURRENCIES=""
 
 if [ "$USE_BTC" == "True" ]; then
     SUPPORTED_CRYPTO_CURRENCIES="$SUPPORTED_CRYPTO_CURRENCIES-btc"
@@ -49,9 +49,9 @@ fi
 # Remove superflous -
 SUPPORTED_CRYPTO_CURRENCIES=`echo $SUPPORTED_CRYPTO_CURRENCIES | sed 's/^-\(.*\)/\1/'`
 
-export BTCPAY_HOST="$AZURE_DNS"
+BTCPAY_HOST="$AZURE_DNS"
 export BTCPAY_DOCKER_COMPOSE="`pwd`/btcpayserver-docker/Production/docker-compose.$SUPPORTED_CRYPTO_CURRENCIES.yml"
-export ACME_CA_URI="https://acme-staging.api.letsencrypt.org/directory"
+ACME_CA_URI="https://acme-staging.api.letsencrypt.org/directory"
 
 echo "DNS NAME: $AZURE_DNS"
 
