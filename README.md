@@ -203,7 +203,7 @@ docker-compose -f "$BTCPAY_DOCKER_COMPOSE" up
 
 # Running without Azure <a name="running-without-azure" />
 
-You can run `./entrypoing.sh` without Azure, on your own Linux machine:
+You can run `entrypoint.sh` without Azure, on your own Linux machine:
 
 1. Make sure your VM has enough RAM (3GB at least for BTC only, 4GB for BTC+LTC)
 2. Configure your DNS record (eg. btcpay.example.com)
