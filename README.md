@@ -8,6 +8,8 @@ You can see our video for an overview:
 
 [![BTCPay - One Click Setup](http://img.youtube.com/vi/Bxs95BdEMHY/mqdefault.jpg)](http://www.youtube.com/watch?v=Bxs95BdEMHY "BTCPay - One Click Setup")
 
+** It must be noted that even if this repository's goal is to make deployment on Azure easy, you can use it on your own VM, see [Running without Azure](#running-without-azure) **
+
 # Deploy via Microsoft Azure Portal
 
 Click on this button and follow instructions:
@@ -194,3 +196,32 @@ When you want to start/stop docker, for the environment variables in `.env` to b
 cd "`dirname $BTCPAY_ENV_FILE`"
 docker-compose -f "$BTCPAY_DOCKER_COMPOSE" up
 ```
+
+# Running without Azure <a name="running-without-azure" />
+
+You can run `./entrypoing.sh` without Azure, on your own Linux machine:
+
+```
+#Configure your DNS record (eg. btcpay.example.com)
+#Make sure it point to this VM and that port 80 and 443 are open
+
+# Clone the repository
+git clone https://github.com/btcpayserver/btcpayserver-azure/
+
+# Enter into this folder
+cd btcpayserver-azure
+
+export AZURE_DNS=btcpay.example.com
+export NBITCOIN_NETWORK=mainnet
+export LETSENCRYPT_EMAIL=admin@example.com
+export BTCPAY_DOCKER_REPO=https://github.com/btcpayserver/btcpayserver-docker/
+export BTCPAY_DOCKER_REPO_BRANCH=master
+export LIGHTNING_ALIAS="my-node"
+export USE_BTC=True
+export USE_LTC=True
+export USE_CLIGHTNING=True
+export ACME_CA_URI=https://acme-v01.api.letsencrypt.org/directory
+. ./entrypoint.sh
+```
+
+You can then browse https://btcpay.example.com/ and enjoy your new node and all commands documented here (like `btcpay-update.sh`) and on the [btcpay-docker](https://github.com/btcpayserver/btcpayserver-docker) repository.
