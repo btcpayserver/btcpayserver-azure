@@ -8,7 +8,11 @@ You can see our video for an overview:
 
 [![BTCPay - One Click Setup](http://img.youtube.com/vi/Bxs95BdEMHY/mqdefault.jpg)](http://www.youtube.com/watch?v=Bxs95BdEMHY "BTCPay - One Click Setup")
 
-** It must be noted that even if this repository's goal is to make deployment on Azure easy, you can use it on your own VM, see [Running without Azure](#running-without-azure) **
+---
+
+It must be noted that even if this repository's goal is to make deployment on Azure easy, you can use it on your own VM, see [Running without Azure](#running-without-azure).
+
+---
 
 # Deploy via Microsoft Azure Portal
 
