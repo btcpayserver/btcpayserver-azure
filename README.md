@@ -205,9 +205,14 @@ docker-compose -f "$BTCPAY_DOCKER_COMPOSE" up
 
 You can run `./entrypoing.sh` without Azure, on your own Linux machine:
 
+1. Configure your DNS record (eg. btcpay.example.com)
+2. Make sure it point to this VM (A record or CNAME record)
+3. Make sure port 80 and 443 are open
+4. Run the following script
+
 ```
-#Configure your DNS record (eg. btcpay.example.com)
-#Make sure it point to this VM and that port 80 and 443 are open
+# Configure your DNS record (eg. btcpay.example.com)
+# Make sure it point to this VM and that port 80 and 443 are open
 
 # Clone the repository
 git clone https://github.com/btcpayserver/btcpayserver-azure/
