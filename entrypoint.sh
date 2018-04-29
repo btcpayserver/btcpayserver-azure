@@ -18,23 +18,23 @@ fi
 
 DOWNLOAD_ROOT="`pwd`"
 
-echo ""
-echo "-------SETUP-----------"
-echo "Parameters passed:"
-echo "AZURE_DNS:$AZURE_DNS"
-echo "NBITCOIN_NETWORK:$NBITCOIN_NETWORK"
-echo "LETSENCRYPT_EMAIL:$LETSENCRYPT_EMAIL"
-echo "BTCPAY_DOCKER_REPO:$BTCPAY_DOCKER_REPO"
-echo "BTCPAY_DOCKER_REPO_BRANCH:$BTCPAY_DOCKER_REPO_BRANCH"
-echo "LIGHTNING_ALIAS:$LIGHTNING_ALIAS"
-echo "USE_BTC:$USE_BTC"
-echo "USE_LTC:$USE_LTC"
-echo "USE_CLIGHTNING:$USE_CLIGHTNING"
-echo "----------------------"
-echo "ACME_CA_URI:$ACME_CA_URI"
-echo "DOWNLOAD_ROOT:$DOWNLOAD_ROOT"
-echo "----------------------"
-echo ""
+echo "
+-------SETUP-----------
+Parameters passed:
+AZURE_DNS:$AZURE_DNS
+NBITCOIN_NETWORK:$NBITCOIN_NETWORK
+LETSENCRYPT_EMAIL:$LETSENCRYPT_EMAIL
+BTCPAY_DOCKER_REPO:$BTCPAY_DOCKER_REPO
+BTCPAY_DOCKER_REPO_BRANCH:$BTCPAY_DOCKER_REPO_BRANCH
+LIGHTNING_ALIAS:$LIGHTNING_ALIAS
+USE_BTC:$USE_BTC
+USE_LTC:$USE_LTC
+USE_CLIGHTNING:$USE_CLIGHTNING
+----------------------
+ACME_CA_URI:$ACME_CA_URI
+DOWNLOAD_ROOT:$DOWNLOAD_ROOT
+----------------------
+"
 
 BTCPAY_ENV_FILE="`pwd`/.env"
 SUPPORTED_CRYPTO_CURRENCIES=""
@@ -68,18 +68,20 @@ export BTCPAY_ENV_FILE
 
 # Put the variable in /etc/environment for reboot
 cp /etc/environment /etc/environment.bak
-echo "AZURE_DNS=\"$AZURE_DNS\"" >> /etc/environment
-echo "BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE\"" >> /etc/environment
-echo "DOWNLOAD_ROOT=\"$DOWNLOAD_ROOT\"" >> /etc/environment
-echo "BTCPAY_ENV_FILE=\"$BTCPAY_ENV_FILE\"" >> /etc/environment
+echo "
+AZURE_DNS=\"$AZURE_DNS\"
+BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE\"
+DOWNLOAD_ROOT=\"$DOWNLOAD_ROOT\"
+BTCPAY_ENV_FILE=\"$BTCPAY_ENV_FILE\"" >> /etc/environment
 
 
 # Put the variable in /etc/profile.d when a user log interactively
 touch "/etc/profile.d/btcpay-env.sh"
-echo "export AZURE_DNS=\"$AZURE_DNS\"" >> /etc/profile.d/btcpay-env.sh
-echo "export BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE\"" >> /etc/profile.d/btcpay-env.sh
-echo "export DOWNLOAD_ROOT=\"$DOWNLOAD_ROOT\"" >> /etc/profile.d/btcpay-env.sh
-echo "export BTCPAY_ENV_FILE=\"$BTCPAY_ENV_FILE\"" >> /etc/profile.d/btcpay-env.sh
+echo "
+export AZURE_DNS=\"$AZURE_DNS\"
+export BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE\"
+export DOWNLOAD_ROOT=\"$DOWNLOAD_ROOT\"
+export BTCPAY_ENV_FILE=\"$BTCPAY_ENV_FILE\"" > /etc/profile.d/btcpay-env.sh
 
 # Install docker (https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#set-up-the-repository) and docker-compose 
 apt-get update 2>error
@@ -135,11 +137,12 @@ initctl reload-configuration
 
 # Set .env file
 touch $BTCPAY_ENV_FILE
-echo "BTCPAY_HOST=$BTCPAY_HOST" >> $BTCPAY_ENV_FILE
-echo "ACME_CA_URI=$ACME_CA_URI" >> $BTCPAY_ENV_FILE
-echo "NBITCOIN_NETWORK=$NBITCOIN_NETWORK" >> $BTCPAY_ENV_FILE
-echo "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" >> $BTCPAY_ENV_FILE
-echo "LIGHTNING_ALIAS=$LIGHTNING_ALIAS" >> $BTCPAY_ENV_FILE
+echo "
+BTCPAY_HOST=$BTCPAY_HOST
+ACME_CA_URI=$ACME_CA_URI
+NBITCOIN_NETWORK=$NBITCOIN_NETWORK
+LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL
+LIGHTNING_ALIAS=$LIGHTNING_ALIAS" > $BTCPAY_ENV_FILE
 
 cd "`dirname $BTCPAY_ENV_FILE`"
 docker-compose -f "$BTCPAY_DOCKER_COMPOSE" up -d 
