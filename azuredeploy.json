@@ -77,8 +77,8 @@
         },
         "allowedValues": [
           "14.04.4-LTS",
-          "15.10",
-          "16.04.0-LTS"
+          "16.04.0-LTS",
+          "18.04-LTS"
         ]
       },
       "repository": {
