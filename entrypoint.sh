@@ -127,6 +127,7 @@ LIGHTNING_ALIAS=$LIGHTNING_ALIAS" > $BTCPAY_ENV_FILE
 # Schedule for reboot
 if [ -d "/etc/systemd/system" ]; then # Use systemd
 
+echo "Adding btcpayserver.service to systemd"
 echo "
 [Unit]
 Description=BTCPayServer service
@@ -149,6 +150,7 @@ systemctl enable btcpayserver
 systemctl start btcpayserver
 
 else # Use upstart
+echo "Using upstart"
 echo "
 # File is saved under /etc/init/start_containers.conf
 # After file is modified, update config with : $ initctl reload-configuration
