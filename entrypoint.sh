@@ -83,6 +83,8 @@ export BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE\"
 export DOWNLOAD_ROOT=\"$DOWNLOAD_ROOT\"
 export BTCPAY_ENV_FILE=\"$BTCPAY_ENV_FILE\"" > /etc/profile.d/btcpay-env.sh
 
+chmod +x /etc/profile.d/btcpay-env.sh
+
 # Install docker (https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#set-up-the-repository) and docker-compose 
 apt-get update 2>error
 apt-get install -y \
@@ -113,8 +115,40 @@ cd btcpayserver-docker
 git checkout $BTCPAY_DOCKER_REPO_BRANCH
 cd ..
 
-# Schedule for reboot
+# Set .env file
+touch $BTCPAY_ENV_FILE
+echo "
+BTCPAY_HOST=$BTCPAY_HOST
+ACME_CA_URI=$ACME_CA_URI
+NBITCOIN_NETWORK=$NBITCOIN_NETWORK
+LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL
+LIGHTNING_ALIAS=$LIGHTNING_ALIAS" > $BTCPAY_ENV_FILE
 
+# Schedule for reboot
+if [ -d "/etc/systemd/system" ]; then # Use systemd
+
+echo "
+[Unit]
+Description=BTCPayServer service
+After=docker.service network-online.target
+Requires=docker.service network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+
+ExecStart=/bin/bash -c '. /etc/profile.d/btcpay-env.sh && cd \"\$(dirname \$BTCPAY_ENV_FILE)\" && docker-compose -f \"\$BTCPAY_DOCKER_COMPOSE\" up -d'
+ExecStop=/bin/bash -c '. /etc/profile.d/btcpay-env.sh && cd \"\$(dirname \$BTCPAY_ENV_FILE)\" && docker-compose -f \"\$BTCPAY_DOCKER_COMPOSE\" stop'
+ExecReload=/bin/bash -c '. /etc/profile.d/btcpay-env.sh && cd \"\$(dirname \$BTCPAY_ENV_FILE)\" && docker-compose -f \"\$BTCPAY_DOCKER_COMPOSE\" restart'
+
+[Install]
+WantedBy=multi-user.target" > /etc/systemd/system/btcpayserver.service
+
+systemctl daemon-reload
+systemctl enable btcpayserver
+systemctl start btcpayserver
+
+else # Use upstart
 echo "
 # File is saved under /etc/init/start_containers.conf
 # After file is modified, update config with : $ initctl reload-configuration
@@ -132,20 +166,11 @@ script
     cd \"`dirname \$BTCPAY_ENV_FILE`\"
     docker-compose -f \"\$BTCPAY_DOCKER_COMPOSE\" up -d
 end script" > /etc/init/start_containers.conf
-
-initctl reload-configuration
-
-# Set .env file
-touch $BTCPAY_ENV_FILE
-echo "
-BTCPAY_HOST=$BTCPAY_HOST
-ACME_CA_URI=$ACME_CA_URI
-NBITCOIN_NETWORK=$NBITCOIN_NETWORK
-LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL
-LIGHTNING_ALIAS=$LIGHTNING_ALIAS" > $BTCPAY_ENV_FILE
+    initctl reload-configuration
+    docker-compose -f "$BTCPAY_DOCKER_COMPOSE" up -d 
+fi
 
 cd "`dirname $BTCPAY_ENV_FILE`"
-docker-compose -f "$BTCPAY_DOCKER_COMPOSE" up -d 
 
 find `pwd` -name "*.sh" -exec chmod +x {} \;
 find `pwd` -name "*.sh" -exec ln -s {} /usr/bin \;
