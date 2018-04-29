@@ -1,6 +1,9 @@
 #!/bin/bash
 
-# It is running as root
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root" 
+   exit 1
+fi
 
 : "${AZURE_DNS:=$1}"
 : "${NBITCOIN_NETWORK:=$2}"
