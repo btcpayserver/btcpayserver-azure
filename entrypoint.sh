@@ -97,23 +97,50 @@ apt-get install -y \
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
 
-add-apt-repository \
+
+
+if ! [ -x "$(command -v docker)" ]; then
+    add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
    $(lsb_release -cs) \
    stable"
-
-apt-get update
-apt-get install -y docker-ce
+    apt-get update
+    if apt-get install -y docker-ce ; then
+        echo "Docker installed"
+    else
+        if [ $(lsb_release -cs) == "bionic" ]; then
+            # Bionic not in the repo yet, see https://linuxconfig.org/how-to-install-docker-on-ubuntu-18-04-bionic-beaver
+            add-apt-repository \
+            "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+            artful \
+            stable"
+            apt-get update
+            apt-get install -y docker-ce
+        fi
+    fi
+else
+    echo "docker is already installed"
+fi
 
 # Install docker-compose
-curl -L https://github.com/docker/compose/releases/download/1.17.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
+if ! [ -x "$(command -v docker-compose)" ]; then
+    curl -L https://github.com/docker/compose/releases/download/1.17.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose
+else
+    echo "docker-compose is already installed"
+fi
 
-# Clone btcpayserver-docker
-git clone $BTCPAY_DOCKER_REPO
-cd btcpayserver-docker
-git checkout $BTCPAY_DOCKER_REPO_BRANCH
-cd ..
+if [ -d "btcpayserver-docker" ]; then
+    cd btcpayserver-docker
+    git pull origin $BTCPAY_DOCKER_REPO_BRANCH
+    cd ..
+else
+    # Clone btcpayserver-docker
+    git clone $BTCPAY_DOCKER_REPO
+    cd btcpayserver-docker
+    git checkout $BTCPAY_DOCKER_REPO_BRANCH
+    cd ..
+fi
 
 # Set .env file
 touch $BTCPAY_ENV_FILE
