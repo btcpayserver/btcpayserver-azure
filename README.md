@@ -136,23 +136,13 @@ Here are the step on provisioning done by Azure (so you can do it yourelf):
     5. Docker repository url used for fetching the docker-compose
     6. The branch of this repository
 * `entrypoint.sh` does the following actions:
-    1. Copy the parameters inside `/etc/environment` and `/etc/profile.d/btcpay-env.sh` so they can be accessed via environment variable globally
+    1. Copy the parameters inside `/etc/profile.d/btcpay-env.sh` so they can be accessed via environment variable globally
     2. Add also those parameters  in the `.env` file which will be used by the `docker-compose`
     3. Install `docker-compose` and `git`
     4. Clone the `btcpayserver-docker` repository
-    5. Configure upstart in `/etc/init/start_containers.conf` to start `docker-compose` if the machine reboot
+    5. Configure systemd in `/etc/systemd/system/btcpayserver.service` to start `docker-compose` if the machine reboot
     6. Start `docker-compose` in the directory of the `.env` as working directory
     7. Create symbolic links to `/usr/bin` to the other `btcpay-*.sh` utility scripts
-
-Example of `/etc/environment`:
-
-```
-PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
-AZURE_DNS="dwoiqdwqb.westeurope.cloudapp.azure.com"
-BTCPAY_DOCKER_COMPOSE="/var/lib/waagent/custom-script/download/0/btcpayserver-docker/Production/docker-compose.btc-ltc.yml"
-BTCPAY_ENV_FILE="/var/lib/waagent/custom-script/download/0/.env"
-DOWNLOAD_ROOT="/var/lib/waagent/custom-script/download/0"
-```
 
 Example of `/etc/profile.d/btcpay-env.sh`:
 
@@ -172,25 +162,24 @@ NBITCOIN_NETWORK=testnet
 LETSENCRYPT_EMAIL=me@example.com
 ```
 
-Example of `/etc/init/start_containers.conf` file:
+Example of `/etc/systemd/system/btcpayserver.service` file:
 
 ```
-# File is saved under /etc/init/start_containers.conf
-# After file is modified, update config with : $ initctl reload-configuration
+[Unit]
+Description=BTCPayServer service
+After=docker.service network-online.target
+Requires=docker.service network-online.target
 
-description     "Start containers (see http://askubuntu.com/a/22105 and http://askubuntu.com/questions/612928/how-to-run-docker-compose-at-bootup)"
+[Service]
+Type=oneshot
+RemainAfterExit=yes
 
-start on filesystem and started docker
-stop on runlevel [!2345]
+ExecStart=/bin/bash -c '. /etc/profile.d/btcpay-env.sh && cd \"\$(dirname \$BTCPAY_ENV_FILE)\" && docker-compose -f \"\$BTCPAY_DOCKER_COMPOSE\" up -d'
+ExecStop=/bin/bash -c '. /etc/profile.d/btcpay-env.sh && cd \"\$(dirname \$BTCPAY_ENV_FILE)\" && docker-compose -f \"\$BTCPAY_DOCKER_COMPOSE\" stop'
+ExecReload=/bin/bash -c '. /etc/profile.d/btcpay-env.sh && cd \"\$(dirname \$BTCPAY_ENV_FILE)\" && docker-compose -f \"\$BTCPAY_DOCKER_COMPOSE\" restart'
 
-# if you want it to automatically restart if it crashes, leave the next line in
-# respawn # might cause over charge
-
-script
-    . /etc/profile.d/btcpay-env.sh
-    cd "`dirname $BTCPAY_ENV_FILE`"
-    docker-compose -f "$BTCPAY_DOCKER_COMPOSE" up -d
-end script
+[Install]
+WantedBy=multi-user.target
 ```
 
 Note that `AZURE_DNS` is not really used anywhere except for debugging purpose.
