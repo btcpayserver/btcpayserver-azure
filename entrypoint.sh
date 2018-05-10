@@ -66,15 +66,6 @@ export BTCPAY_DOCKER_COMPOSE
 export DOWNLOAD_ROOT
 export BTCPAY_ENV_FILE
 
-# Put the variable in /etc/environment for reboot
-cp /etc/environment /etc/environment.bak
-echo "
-AZURE_DNS=\"$AZURE_DNS\"
-BTCPAY_DOCKER_COMPOSE=\"$BTCPAY_DOCKER_COMPOSE\"
-DOWNLOAD_ROOT=\"$DOWNLOAD_ROOT\"
-BTCPAY_ENV_FILE=\"$BTCPAY_ENV_FILE\"" >> /etc/environment
-
-
 # Put the variable in /etc/profile.d when a user log interactively
 touch "/etc/profile.d/btcpay-env.sh"
 echo "
