@@ -41,25 +41,41 @@
           "description": "Choose nainnet for production, or testnet for testing"
         }
       },
-      "acceptBTC": {
-        "type": "bool",
-        "defaultValue": true,
+      "supportedCrypto1": {
+        "type": "string",
+        "allowedValues": [
+          "",
+          "btc",
+          "ltc",
+          "btg"
+        ],
+        "defaultValue": "btc",
         "metadata": {
-          "description": "Accept Bitcoin"
+          "description": "Choose a crypto currency to support"
         }
       },
-      "acceptLTC": {
-        "type": "bool",
-        "defaultValue": false,
+      "supportedCrypto2": {
+        "type": "string",
+        "allowedValues": [
+          "",
+          "btc",
+          "ltc",
+          "btg"
+        ],
+        "defaultValue": "",
         "metadata": {
-          "description": "Accept Litecoin"
+          "description": "Choose a second crypto currency to support"
         }
       },
-      "internalCLightning": {
-        "type": "bool",
-        "defaultValue": false,
+      "lightningNetworkImplementation": {
+        "type": "string",
+        "allowedValues": [
+          "",
+          "clightning"
+        ],
+        "defaultValue": "",
         "metadata": {
-          "description": "Support internal clightning node (beta)"
+          "description": "Choose a lightning network implementation"
         }
       },
       "lightningNodeAlias": {
@@ -90,7 +106,7 @@
       },
       "branch": {
         "type": "string",
-        "defaultValue": "stable",
+        "defaultValue": "master",
         "metadata": {
           "description": "The branch from the GIT repository to use"
         }
@@ -329,11 +345,8 @@
           "autoUpgradeMinorVersion": true,
           "settings": 
           { 
-              "fileUris" : ["https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/entrypoint.sh", 
-                            "https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/changedomain.sh",
-                            "https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/btcpay-restart.sh",
-                            "https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/btcpay-update.sh"],
-              "commandToExecute" : "[concat('./entrypoint.sh ', reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn, ' ', parameters('network'), ' ', parameters('notificationEmail'), ' ', parameters('repository'), ' ', parameters('branch'), ' \"', parameters('lightningNodeAlias'), '\" ', parameters('acceptBTC'), ' ', parameters('acceptLTC'), ' ', parameters('internalCLightning'))]"
+              "fileUris" : ["https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/azure-entrypoint.sh"],
+              "commandToExecute" : "[concat('./azure-entrypoint.sh ', reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn, ' ', parameters('network'), ' ', parameters('notificationEmail'), ' ', parameters('repository'), ' ', parameters('branch'), ' \"', parameters('lightningNodeAlias'), '\" ', parameters('supportedCrypto1'), ' ', parameters('supportedCrypto2'), ' ', parameters('lightningNetworkImplementation'))]"
           }
         }
       }
