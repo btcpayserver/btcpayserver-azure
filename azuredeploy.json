@@ -47,7 +47,8 @@
           "",
           "btc",
           "ltc",
-          "btg"
+          "btg",
+          "ftc"
         ],
         "defaultValue": "btc",
         "metadata": {
@@ -60,7 +61,8 @@
           "",
           "btc",
           "ltc",
-          "btg"
+          "btg",
+          "ftc"
         ],
         "defaultValue": "",
         "metadata": {
