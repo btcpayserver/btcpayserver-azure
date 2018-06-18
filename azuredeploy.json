@@ -17,8 +17,9 @@
       },
       "notificationEmail": {
         "type": "string",
+        "defaultValue": "me@example.com",
         "metadata": {
-          "description": "Email used by Let's encrypt to notify you about certificate expiration"
+          "description": "Email used by Let's encrypt to notify you about certificate expiration (optional)"
         }
       },
       "vmSize": {
