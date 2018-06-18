@@ -17,7 +17,6 @@
       },
       "notificationEmail": {
         "type": "string",
-        "defaultValue": "yourname@example.com",
         "metadata": {
           "description": "Email used by Let's encrypt to notify you about certificate expiration (optional)"
         }
