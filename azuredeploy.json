@@ -38,7 +38,7 @@
         ],
         "defaultValue": "mainnet",
         "metadata": {
-          "description": "Choose nainnet for production, or testnet for testing"
+          "description": "Choose mainnet for production, or testnet for testing"
         }
       },
       "supportedCrypto1": {
