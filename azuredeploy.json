@@ -75,7 +75,8 @@
         "type": "string",
         "allowedValues": [
           "",
-          "clightning"
+          "clightning",
+          "lnd"
         ],
         "defaultValue": "",
         "metadata": {
