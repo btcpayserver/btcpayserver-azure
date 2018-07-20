@@ -49,7 +49,8 @@
           "ltc",
           "grs",
           "btg",
-          "ftc"
+          "ftc",
+          "via"
         ],
         "defaultValue": "btc",
         "metadata": {
@@ -64,7 +65,8 @@
           "ltc",
           "grs",
           "btg",
-          "ftc"
+          "ftc",
+          "via"
         ],
         "defaultValue": "",
         "metadata": {
