@@ -2,17 +2,11 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-      "adminUsername": {
+      "sshKey": {
         "type": "string",
-        "defaultValue": "btcpayserver",
+        "defaultValue": "",
         "metadata": {
-          "description": "The name of the SSH user."
-        }
-      },
-      "adminPassword": {
-        "type": "securestring",
-        "metadata": {
-          "description": "The name of the SSH password."
+          "description": "SSH Key which will be granted access to the VM (optional)"
         }
       },
       "notificationEmail": {
@@ -308,8 +302,8 @@
           },
           "osProfile": {
             "computerName": "[variables('vmName')]",
-            "adminUsername": "[parameters('adminUsername')]",
-            "adminPassword": "[parameters('adminPassword')]"
+            "adminUsername": "temp",
+            "adminPassword": "[uniqueString(resourceGroup().id)]"
           },
           "storageProfile": {
             "imageReference": {
@@ -353,23 +347,19 @@
           "settings": 
           { 
               "fileUris" : ["https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/azure-entrypoint.sh"],
-              "commandToExecute" : "[concat('./azure-entrypoint.sh ', reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn, ' \"', parameters('network'), '\" \"', parameters('notificationEmail'), '\" \"', parameters('repository'), '\" \"', parameters('branch'), '\" \"', parameters('lightningNodeAlias'), '\" \"', parameters('supportedCrypto1'), '\" \"', parameters('supportedCrypto2'), '\" \"', parameters('lightningNetworkImplementation'), '\"')]"
+              "commandToExecute" : "[concat('./azure-entrypoint.sh ', reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn, ' \"', parameters('network'), '\" \"', parameters('notificationEmail'), '\" \"', parameters('repository'), '\" \"', parameters('branch'), '\" \"', parameters('lightningNodeAlias'), '\" \"', parameters('supportedCrypto1'), '\" \"', parameters('supportedCrypto2'), '\" \"', parameters('lightningNetworkImplementation'), '\" \"', parameters('sshKey'),'\"')]"
           }
         }
       }
     ],
     "outputs": {
-        "ssh-username" : {
-            "type": "string",
-            "value": "[parameters('adminUsername')]"
-        },
         "server-azure-dns" : {
             "type": "string",
             "value": "[reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn]"
         },
         "ssh-commandline" : {
           "type": "string",
-          "value": "[concat('ssh', ' ', parameters('adminUsername'), '@', reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn)]"
+          "value": "Connect to your BTCPay instance, register the administration account and go to Server Settings / Services / SSH to get more information"
         },
         "server-url" : {
             "type": "string",
