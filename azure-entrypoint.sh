@@ -29,8 +29,8 @@ if [[ "$CUSTOM_SSH_KEY" ]]; then
     echo "$CUSTOM_SSH_KEY" >> /root/.ssh/authorized_keys
     echo "Custom SSH Key added to /root/.ssh/authorized_keys"
 fi
-# sed -i -e '/^PasswordAuthentication / s/ .*/ no/' /etc/ssh/sshd_config
-# userdel -r -f temp
+sed -i -e '/^PasswordAuthentication / s/ .*/ no/' /etc/ssh/sshd_config
+userdel -r -f temp
 
 # Configure BTCPAY to have access to SSH
 BTCPAY_HOST_SSHKEYFILE=/root/.ssh/id_rsa_btcpay
