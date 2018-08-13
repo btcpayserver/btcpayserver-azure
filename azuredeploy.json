@@ -353,13 +353,13 @@
       }
     ],
     "outputs": {
-        "server-azure-dns" : {
-            "type": "string",
-            "value": "[reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn]"
-        },
         "ssh-commandline" : {
           "type": "string",
-          "value": "Connect to your BTCPay instance, register the administration account and go to Server Settings / Services / SSH to get more information"
+          "value": "[concat('ssh', ' root@', reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn)]"
+        },
+        "ssh-help" : {
+          "type": "string",
+          "value": "If you did not set a SSH Key, please connect to your BTCPay instance, register the administration account and go to Server Settings / Services / SSH to get more information"
         },
         "server-url" : {
             "type": "string",
