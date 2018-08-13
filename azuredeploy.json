@@ -303,7 +303,7 @@
           "osProfile": {
             "computerName": "[variables('vmName')]",
             "adminUsername": "temp",
-            "adminPassword": "[uniqueString(resourceGroup().id)]"
+            "adminPassword": "[concat(uniqueString(resourceGroup().id), 'aA5@')]"
           },
           "storageProfile": {
             "imageReference": {
