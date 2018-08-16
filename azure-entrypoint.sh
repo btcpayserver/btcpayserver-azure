@@ -42,4 +42,5 @@ git checkout $BTCPAY_DOCKER_REPO_BRANCH
 
 . ./btcpay-setup.sh -i
 
-nohup /etc/init.d/sshd restart &
+[ -x "$(command -v /etc/init.d/sshd)" ] && nohup /etc/init.d/sshd restart &
+[ -x "$(command -v /etc/init.d/ssh)" ] && nohup /etc/init.d/ssh restart &
