@@ -44,7 +44,9 @@
           "grs",
           "btg",
           "ftc",
-          "via"
+          "via",
+          "doge",
+          "mona"
         ],
         "defaultValue": "btc",
         "metadata": {
@@ -60,7 +62,9 @@
           "grs",
           "btg",
           "ftc",
-          "via"
+          "via",
+          "doge",
+          "mona"
         ],
         "defaultValue": "",
         "metadata": {
