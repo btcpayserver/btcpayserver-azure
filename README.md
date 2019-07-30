@@ -4,13 +4,13 @@ Instructions to deploy BTCPay Server in [production environment](https://github.
 
 You can click on this button to view what will be deployed by your deployment:
 
-[![Visualize](http://armviz.io/visualizebutton.png)](http://armviz.io/#?load=https%3A%2F%2Fraw.githubusercontent.com%2Fandrasfuchs%2Fbtcpayserver-azure%2Fmaster%2Fazuredeploy.json)
+[![Visualize](http://armviz.io/visualizebutton.png)](http://armviz.io/#?load=https%3A%2F%2Fraw.githubusercontent.com%2Fbtcpayserver%2Fbtcpayserver-azure%2Fmaster%2Fazuredeploy.json)
 
 The following instructions assume you have [Microsoft Azure](https://azure.microsoft.com/) subscription.
 
 You can click on this button to deploy BTCPayServer:
 
-[![Deploy to Azure](https://azuredeploy.net/deploybutton.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fandrasfuchs%2Fbtcpayserver-azure%2Fmaster%2Fazuredeploy.json)
+[![Deploy to Azure](https://azuredeploy.net/deploybutton.svg)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fbtcpayserver%2Fbtcpayserver-azure%2Fmaster%2Fazuredeploy.json)
 
 You can see our video for an overview:
 

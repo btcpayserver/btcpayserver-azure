@@ -485,7 +485,7 @@
           "autoUpgradeMinorVersion": true,
           "settings": 
           { 
-              "fileUris" : ["https://raw.githubusercontent.com/andrasfuchs/btcpayserver-azure/master/azure-entrypoint.sh"],
+              "fileUris" : ["https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/azure-entrypoint.sh"],
               "commandToExecute" : "[concat('./azure-entrypoint.sh ', reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn, ' \"', parameters('network'), '\" \"', parameters('notificationEmail'), '\" \"', parameters('repository'), '\" \"', parameters('branch'), '\" \"', parameters('lightningNodeAlias'), '\" \"', parameters('supportedCrypto1'), '\" \"', parameters('supportedCrypto2'), '\" \"', parameters('supportedCrypto3'), '\" \"', parameters('supportedCrypto4'), '\" \"', parameters('supportedCrypto5'), '\" \"', parameters('supportedCrypto6'), '\" \"', parameters('supportedCrypto7'), '\" \"', parameters('supportedCrypto8'), '\" \"', parameters('supportedCrypto9'), '\" \"', parameters('lightningNetworkImplementation'), '\" \"', parameters('sshKey'),'\"')]"
           }
         }
