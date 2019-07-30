@@ -73,6 +73,139 @@
           "description": "Choose a second crypto currency to support"
         }
       },
+      "supportedCrypto3": {
+        "type": "string",
+        "allowedValues": [
+          "",
+          "btc",
+          "ltc",
+		  "dash",
+          "grs",
+          "btg",
+          "ftc",
+          "via",
+          "doge",
+          "mona"
+        ],
+        "defaultValue": "",
+        "metadata": {
+          "description": "Choose a third crypto currency to support"
+        }
+      },
+      "supportedCrypto4": {
+        "type": "string",
+        "allowedValues": [
+          "",
+          "btc",
+          "ltc",
+		  "dash",
+          "grs",
+          "btg",
+          "ftc",
+          "via",
+          "doge",
+          "mona"
+        ],
+        "defaultValue": "",
+        "metadata": {
+          "description": "Choose a fourth crypto currency to support"
+        }
+      },
+      "supportedCrypto5": {
+        "type": "string",
+        "allowedValues": [
+          "",
+          "btc",
+          "ltc",
+		  "dash",
+          "grs",
+          "btg",
+          "ftc",
+          "via",
+          "doge",
+          "mona"
+        ],
+        "defaultValue": "",
+        "metadata": {
+          "description": "Choose a fifth crypto currency to support"
+        }
+      },
+      "supportedCrypto6": {
+        "type": "string",
+        "allowedValues": [
+          "",
+          "btc",
+          "ltc",
+		  "dash",
+          "grs",
+          "btg",
+          "ftc",
+          "via",
+          "doge",
+          "mona"
+        ],
+        "defaultValue": "",
+        "metadata": {
+          "description": "Choose a sixth crypto currency to support"
+        }
+      },
+      "supportedCrypto7": {
+        "type": "string",
+        "allowedValues": [
+          "",
+          "btc",
+          "ltc",
+		  "dash",
+          "grs",
+          "btg",
+          "ftc",
+          "via",
+          "doge",
+          "mona"
+        ],
+        "defaultValue": "",
+        "metadata": {
+          "description": "Choose a seventh crypto currency to support"
+        }
+      },
+      "supportedCrypto8": {
+        "type": "string",
+        "allowedValues": [
+          "",
+          "btc",
+          "ltc",
+		  "dash",
+          "grs",
+          "btg",
+          "ftc",
+          "via",
+          "doge",
+          "mona"
+        ],
+        "defaultValue": "",
+        "metadata": {
+          "description": "Choose a eigth crypto currency to support"
+        }
+      },
+      "supportedCrypto9": {
+        "type": "string",
+        "allowedValues": [
+          "",
+          "btc",
+          "ltc",
+		  "dash",
+          "grs",
+          "btg",
+          "ftc",
+          "via",
+          "doge",
+          "mona"
+        ],
+        "defaultValue": "",
+        "metadata": {
+          "description": "Choose a nineth crypto currency to support"
+        }
+      },
       "lightningNetworkImplementation": {
         "type": "string",
         "allowedValues": [
