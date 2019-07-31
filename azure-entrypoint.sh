@@ -13,11 +13,18 @@ fi
 : "${LIGHTNING_ALIAS:=$6}"
 : "${BTCPAYGEN_CRYPTO1:=$7}"
 : "${BTCPAYGEN_CRYPTO2:=$8}"
-: "${BTCPAYGEN_LIGHTNING:=$9}"
+: "${BTCPAYGEN_CRYPTO3:=$9}"
+: "${BTCPAYGEN_CRYPTO4:=$10}"
+: "${BTCPAYGEN_CRYPTO5:=$11}"
+: "${BTCPAYGEN_CRYPTO6:=$12}"
+: "${BTCPAYGEN_CRYPTO7:=$13}"
+: "${BTCPAYGEN_CRYPTO8:=$14}"
+: "${BTCPAYGEN_CRYPTO9:=$15}"
+: "${BTCPAYGEN_LIGHTNING:=$16}"
 : "${BTCPAYGEN_REVERSEPROXY:=nginx}"
 : "${ACME_CA_URI:=https://acme-staging.api.letsencrypt.org/directory}"
 
-CUSTOM_SSH_KEY="${10}"
+CUSTOM_SSH_KEY="${17}"
 BTCPAYGEN_ADDITIONAL_FRAGMENTS="opt-save-storage"
 
 # Setup SSH access via private key
