@@ -28,7 +28,7 @@ CUSTOM_SSH_KEY="${17}"
 BTCPAYGEN_ADDITIONAL_FRAGMENTS="opt-save-storage"
 
 # Setup SSH access via private key
-ssh-keygen -t rsa -f /root/.ssh/id_rsa_btcpay -q -P ""
+ssh-keygen -t rsa -f /root/.ssh/id_rsa_btcpay -q -P "" -m PEM
 echo "# Key used by BTCPay Server" >> /root/.ssh/authorized_keys
 cat /root/.ssh/id_rsa_btcpay.pub >> /root/.ssh/authorized_keys
 if [[ "$CUSTOM_SSH_KEY" ]]; then
