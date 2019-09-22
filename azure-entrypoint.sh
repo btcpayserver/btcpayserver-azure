@@ -22,7 +22,6 @@ fi
 : "${BTCPAYGEN_CRYPTO9:=$15}"
 : "${BTCPAYGEN_LIGHTNING:=$16}"
 : "${BTCPAYGEN_REVERSEPROXY:=nginx}"
-: "${ACME_CA_URI:=https://acme-staging.api.letsencrypt.org/directory}"
 
 CUSTOM_SSH_KEY="${17}"
 BTCPAYGEN_ADDITIONAL_FRAGMENTS="opt-save-storage"
