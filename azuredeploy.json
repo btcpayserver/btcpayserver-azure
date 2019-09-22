@@ -73,6 +73,139 @@
           "description": "Choose a second crypto currency to support"
         }
       },
+      "supportedCrypto3": {
+        "type": "string",
+        "allowedValues": [
+          "",
+          "btc",
+          "ltc",
+          "dash",
+          "grs",
+          "btg",
+          "ftc",
+          "via",
+          "doge",
+          "mona"
+        ],
+        "defaultValue": "",
+        "metadata": {
+          "description": "Choose a third crypto currency to support"
+        }
+      },
+      "supportedCrypto4": {
+        "type": "string",
+        "allowedValues": [
+          "",
+          "btc",
+          "ltc",
+          "dash",
+          "grs",
+          "btg",
+          "ftc",
+          "via",
+          "doge",
+          "mona"
+        ],
+        "defaultValue": "",
+        "metadata": {
+          "description": "Choose a fourth crypto currency to support"
+        }
+      },
+      "supportedCrypto5": {
+        "type": "string",
+        "allowedValues": [
+          "",
+          "btc",
+          "ltc",
+          "dash",
+          "grs",
+          "btg",
+          "ftc",
+          "via",
+          "doge",
+          "mona"
+        ],
+        "defaultValue": "",
+        "metadata": {
+          "description": "Choose a fifth crypto currency to support"
+        }
+      },
+      "supportedCrypto6": {
+        "type": "string",
+        "allowedValues": [
+          "",
+          "btc",
+          "ltc",
+          "dash",
+          "grs",
+          "btg",
+          "ftc",
+          "via",
+          "doge",
+          "mona"
+        ],
+        "defaultValue": "",
+        "metadata": {
+          "description": "Choose a sixth crypto currency to support"
+        }
+      },
+      "supportedCrypto7": {
+        "type": "string",
+        "allowedValues": [
+          "",
+          "btc",
+          "ltc",
+          "dash",
+          "grs",
+          "btg",
+          "ftc",
+          "via",
+          "doge",
+          "mona"
+        ],
+        "defaultValue": "",
+        "metadata": {
+          "description": "Choose a seventh crypto currency to support"
+        }
+      },
+      "supportedCrypto8": {
+        "type": "string",
+        "allowedValues": [
+          "",
+          "btc",
+          "ltc",
+          "dash",
+          "grs",
+          "btg",
+          "ftc",
+          "via",
+          "doge",
+          "mona"
+        ],
+        "defaultValue": "",
+        "metadata": {
+          "description": "Choose a eigth crypto currency to support"
+        }
+      },
+      "supportedCrypto9": {
+        "type": "string",
+        "allowedValues": [
+          "",
+          "btc",
+          "ltc",
+          "dash",
+          "grs",
+          "btg",
+          "ftc",
+          "via",
+          "doge",
+          "mona"
+        ],
+        "defaultValue": "",
+        "metadata": {
+          "description": "Choose a nineth crypto currency to support"
+        }
+      },
       "lightningNetworkImplementation": {
         "type": "string",
         "allowedValues": [
@@ -353,7 +486,7 @@
           "settings": 
           { 
               "fileUris" : ["https://raw.githubusercontent.com/btcpayserver/btcpayserver-azure/master/azure-entrypoint.sh"],
-              "commandToExecute" : "[concat('./azure-entrypoint.sh ', reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn, ' \"', parameters('network'), '\" \"', parameters('notificationEmail'), '\" \"', parameters('repository'), '\" \"', parameters('branch'), '\" \"', parameters('lightningNodeAlias'), '\" \"', parameters('supportedCrypto1'), '\" \"', parameters('supportedCrypto2'), '\" \"', parameters('lightningNetworkImplementation'), '\" \"', parameters('sshKey'),'\"')]"
+              "commandToExecute" : "[concat('./azure-entrypoint.sh ', reference(concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName')), '2016-03-30').dnsSettings.fqdn, ' \"', parameters('network'), '\" \"', parameters('notificationEmail'), '\" \"', parameters('repository'), '\" \"', parameters('branch'), '\" \"', parameters('lightningNodeAlias'), '\" \"', parameters('supportedCrypto1'), '\" \"', parameters('supportedCrypto2'), '\" \"', parameters('supportedCrypto3'), '\" \"', parameters('supportedCrypto4'), '\" \"', parameters('supportedCrypto5'), '\" \"', parameters('supportedCrypto6'), '\" \"', parameters('supportedCrypto7'), '\" \"', parameters('supportedCrypto8'), '\" \"', parameters('supportedCrypto9'), '\" \"', parameters('lightningNetworkImplementation'), '\" \"', parameters('sshKey'),'\"')]"
           }
         }
       }
