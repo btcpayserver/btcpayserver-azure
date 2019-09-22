@@ -27,10 +27,6 @@ fi
 CUSTOM_SSH_KEY="${17}"
 BTCPAYGEN_ADDITIONAL_FRAGMENTS="opt-save-storage"
 
-# Setup SSH access via private key
-ssh-keygen -t rsa -f /root/.ssh/id_rsa_btcpay -q -P "" -m PEM
-echo "# Key used by BTCPay Server" >> /root/.ssh/authorized_keys
-cat /root/.ssh/id_rsa_btcpay.pub >> /root/.ssh/authorized_keys
 if [[ "$CUSTOM_SSH_KEY" ]]; then
     echo "" >> /root/.ssh/authorized_keys
     echo "# User key" >> /root/.ssh/authorized_keys
@@ -40,8 +36,9 @@ fi
 sed -i -e '/^PasswordAuthentication / s/ .*/ no/' /etc/ssh/sshd_config
 userdel -r -f temp
 
+cd /root
 # Configure BTCPAY to have access to SSH
-BTCPAY_HOST_SSHKEYFILE=/root/.ssh/id_rsa_btcpay
+BTCPAY_ENABLE_SSH=true
 
 # Clone btcpayserver-docker
 git clone $BTCPAY_DOCKER_REPO
